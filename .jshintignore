@@ -1,0 +1,8 @@
+node_modules
+public/
+client/modules
+client/libraries
+client/templates.js
+coverage
+instbrew/modules/firechat.js
+workspace/*

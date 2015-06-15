@@ -1,0 +1,36 @@
+{
+  "name": "micromono",
+  "version": "0.1.0",
+  "description": "Microservice in monolithic style",
+  "main": "lib/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lsm/micromono.git"
+  },
+  "keywords": [
+    "microservice"
+  ],
+  "author": "Marc Liu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lsm/micromono/issues"
+  },
+  "homepage": "https://github.com/lsm/micromono",
+  "dependencies": {
+    "ampersand-class-extend": "1.0.2",
+    "express": "^4.12.4",
+    "jspm": "0.15.7",
+    "lodash.assign": "3.2.0",
+    "serve-static": "1.9.3",
+    "zmq": "2.11.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.6"
+  }
+}
