@@ -1,8 +1,14 @@
 /**
- * Example of booting a standalone service provider
+ * Example service provider server.
  */
-'use strict';
 
+// Get a micromono instance.
 var micromono = require('micromono')();
 
-micromono.bootService(__dirname);
+// Load the service provider class from local storage.
+micromono.require(__dirname);
+
+// Boot the provider service and start broadcasting service info to network.
+micromono.boot().then(function() {
+  console.log('booted');
+});

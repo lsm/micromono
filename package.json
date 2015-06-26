@@ -4,7 +4,8 @@
   "description": "Microservice in monolithic style",
   "main": "lib/index.js",
   "directories": {
-    "example": "example"
+    "example": "example",
+    "lib": "lib"
   },
   "scripts": {
     "test": "npm test"
@@ -24,10 +25,14 @@
   "homepage": "https://github.com/lsm/micromono",
   "dependencies": {
     "ampersand-class-extend": "1.0.2",
-    "express": "^4.12.4",
+    "async": "1.2.1",
+    "express": "4.12.4",
     "jspm": "0.15.7",
     "lodash.assign": "3.2.0",
+    "lodash.toarray": "3.0.2",
+    "random-port": "0.1.0",
     "serve-static": "1.9.3",
+    "shortid": "2.2.2",
     "zmq": "2.11.1"
   },
   "devDependencies": {

@@ -1,5 +1,4 @@
-var micromono = require('micromono');
-var Service = micromono.Service;
+var Service = require('micromono').Service;
 
 
 function DB() {
@@ -12,6 +11,8 @@ function DB() {
 var db = new DB();
 
 module.exports = Service.extend({
+  packagePath: __dirname,
+
   routes: {
     'get::/blog/:title': function(title, callback) {
       // find blog with title from db
@@ -25,10 +26,19 @@ module.exports = Service.extend({
     'post::/blog/create': 'createPost'
   },
 
-  // Initialize function, do setup for your service here. Call the callback when
-  // it's ready to serve requests.
-  init: function(callback) {
-    callback();
+  //
+  /**
+   * Initialize function, do setup for your service here.
+   * Resolve the promise when the initialization is done.
+   *
+   * @return {Promise}
+   */
+  init: function() {
+    var promise = new Promise(function(resolve, reject) {
+      setTimeout(resolve, 1000);
+    });
+
+    return promise;
   },
 
   // the request to 'post::/blog/create' will map to this function
@@ -38,6 +48,8 @@ module.exports = Service.extend({
       title: body.title,
       content: body.content
     };
+
+    console.log(post);
 
     db.save(post, callback);
   }

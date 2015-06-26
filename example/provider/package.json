@@ -1,5 +1,5 @@
 {
-  "name": "blog",
+  "name": "provider",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "dev": "browser-sync start --files 'client/**/*.html,client/**/*.js,client/**/*.css' --server 'public'"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "jspm": {
     "main": "blog/main",
     "format": "cjs",
