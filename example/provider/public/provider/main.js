@@ -1,9 +1,9 @@
 'use strict';
 
 // import Model from 'model';
-var Model = require('blog/model');
-require('blog/style.css!');
-require('blog/main.css!');
+var Model = require('provider/model');
+require('provider/style.css!');
+require('provider/main.css!');
 
 new Model('john');
 
