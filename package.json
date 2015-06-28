@@ -27,6 +27,7 @@
     "ampersand-class-extend": "1.0.2",
     "async": "1.2.1",
     "express": "4.12.4",
+    "http-proxy": "1.11.1",
     "jspm": "0.15.7",
     "lodash.assign": "3.2.0",
     "lodash.toarray": "3.0.2",

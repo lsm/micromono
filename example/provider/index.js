@@ -13,14 +13,16 @@ var db = new DB();
 module.exports = Service.extend({
   packagePath: __dirname,
 
+  baseUrl: '/provider-prefix',
+
   routes: {
-    'get::/blog/:title': function(title, callback) {
+    'get::/blog/:title': function(req, res) {
       // find blog with title from db
       var post = {
-        title: title,
+        title: req.params.title,
         content: 'Example blog content'
       };
-      callback(null, post);
+      res.send(post);
     },
 
     'post::/blog/create': 'createPost'

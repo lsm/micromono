@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "jspm": {
-    "main": "blog/main",
+    "main": "provider/main",
     "format": "cjs",
     "directories": {
       "baseURL": "public",
