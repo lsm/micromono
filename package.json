@@ -35,8 +35,5 @@
     "serve-static": "1.9.3",
     "shortid": "2.2.2",
     "zmq": "2.11.1"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.7.6"
   }
 }
