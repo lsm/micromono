@@ -36,10 +36,13 @@ module.exports = Service.extend({
    * @return {Promise}
    */
   init: function() {
+    // access your express instance like this
+    var app = this.app;
+    app.set('x', 123);
     var promise = new Promise(function(resolve, reject) {
+      console.log(app.get('x'));
       setTimeout(resolve, 1000);
     });
-
     return promise;
   },
 
