@@ -14,7 +14,7 @@ var Provider = micromono.require('provider');
 var p1 = new Provider();
 
 // Boot the service(s) do stuff in the promise callback.
-micromono.boot().then(function() {
+micromono.boot(app).then(function() {
   console.log('consumer booted');
 
   // Get the provider instance.
@@ -24,8 +24,6 @@ micromono.boot().then(function() {
   var p2 = new Provider();
   console.log(p1 === p2 && p2 === provider);
 
-  // mount routes to you existing express app
-  micromono.express(app);
   // and start it
   app.listen(3000);
 
