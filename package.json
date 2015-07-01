@@ -1,6 +1,6 @@
 {
   "name": "micromono",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Microservice in monolithic style",
   "main": "lib/index.js",
   "directories": {
