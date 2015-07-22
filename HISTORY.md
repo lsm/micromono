@@ -1,3 +1,8 @@
+0.1.14 (2015/07/22)
+===================
+- Add remote middleware support.
+
+
 0.1.13 (2015/07/14)
 ===================
 The first usable version with following features:
