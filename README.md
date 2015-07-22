@@ -1,2 +1,4 @@
-[[doc/micromono-logo.png|width=90px]]
+<p align="center">
+  <img src="doc/micromono-logo.png" width="128px"/>
+</p>
 # micromono
