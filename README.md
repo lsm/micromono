@@ -1,2 +1,2 @@
-->![MicroMono Logo](/doc/micromono-logo.png)<-
+->[[/doc/micromono-logo.png|width=90.9px]]<-
 # micromono
