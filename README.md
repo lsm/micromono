@@ -1,2 +1,2 @@
-->![](/doc/micromono-logo.png "MicroMono Logo" =90.9*98.4)<-
+->![MicroMono Logo](/doc/micromono-logo.png =90.9x98.4)<-
 # micromono
