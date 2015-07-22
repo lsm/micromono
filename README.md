@@ -1,2 +1,2 @@
-[[/doc/micromono-logo.png|width=90.9px]]
+[[doc/micromono-logo.png|width=90px]]
 # micromono
