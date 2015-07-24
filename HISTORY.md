@@ -1,3 +1,7 @@
+0.1.15 (2015/07/23)
+===================
+- Bug fix for incorrect path of middleware router.
+
 0.1.14 (2015/07/22)
 ===================
 - Add remote middleware support.
