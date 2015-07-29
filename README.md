@@ -225,7 +225,7 @@ Having any kind of remote middleware will of course slow down the performance dr
 
 ### Page rendering
 
-*Coming soon*
+*Coming very soon. Please watch or star the project.*
 
 ## RPC
 
