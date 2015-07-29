@@ -142,7 +142,7 @@ As we mentioned at the beginning. The pros and cons of micro-services architectu
 
 ## Web Framework
 
-MicroMono wraps a thin layer on top of the express framework.  So, existing express applications should be able to easily be ported without any problems.  In this section we will go through 3 topics to understand the web framework part of MicroMono: **[http routing](http-routing)**, **[middleware](middleware)** and **[page rendering](page-rendering)**.
+MicroMono wraps a thin layer on top of the express framework.  So, existing express applications should be able to easily be ported without any problems.  In this section we will go through 3 topics to understand the web framework part of MicroMono: **[http routing](README.md#http-routing)**, **[middleware](README.md#middleware)** and **[page rendering](README.md#page-rendering)**.
 
 ### Http routing
 
@@ -222,6 +222,10 @@ As we can see, if auth successfully the response stream of routing handler could
 Fully-remote middleware is easier to understand. It's only a normal middleware running remotely like a proxy. (Currently not supported by micromono)
 
 Having any kind of remote middleware will of course slow down the performance dramatically, but sometimes it's worth it, to reduce the complexity of deployment and provide a more modularized architecture. MicroMono is focused on giving you the most flexibility and allowing you choose the trade-offs.
+
+### Page rendering
+
+*Coming soon*
 
 ## RPC
 
