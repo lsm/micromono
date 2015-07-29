@@ -65,7 +65,7 @@ app.get('/hello/:name', function(req, res){
 });
 ```
 
-For more detailed information about http routing, middleware or page rendering please go to [Web framework](README.md#web-framework).
+For more detailed information about http routing, middleware or page rendering please go to [Web Framework](README.md#web-framework).
 
 #### Service Intialization
 
@@ -103,7 +103,7 @@ module.exports = Service.extend({
 });
 ```
 
-We will talk more about **running a service** in section [Local And Remote](README.md#local-and-remote)
+We will discuss more about **running a service** in section [Local And Remote](README.md#local-and-remote)
 
 ### Server
 
@@ -135,7 +135,10 @@ micromono.boot(app).then(function(){
 
 ## Local And Remote
 
+As we mentioned at the beginning. The pros and cons of micro-services architecture are obvious and have been widely discussed. MicroMono allows you to **choose the right trade-offs for the right scenario**. If you application has 10 services, you may run all the 10 services on your local dev machine. Or run 1 service which you are dveloping locally and use the rest 9 of them (stable/finished) remotely through network. Having a completely different setup for deployment or testing services in parallel? Imagination is your only limitation. The most critical thing is **being able to use any services locally or remotely without knowing the difference or changing the code**. MicroMono gives you this ability by rebuilding the exact service class based on service announcement. This is the most important feature MicroMono brings to the table and you won't feel it as MicroMono does the job behind the scenes. It is true no matter what you are dealing with: http request, RPC or front-end scripts. 
+
 ![](doc/images/2-mixed.png)
+
 
 ## Web Framework
 
@@ -173,7 +176,7 @@ module.exports = Service.extend({
 });
 ```
 
-### Middleware (Middleware as a Service)
+### Middleware
 
 Normally, middleware is just piece of code which can be plugged-in into your routing system to modify the http request or response stream on the fly. In detail, there are 4 things you can alter:
 
@@ -191,19 +194,24 @@ Some middleware may modify all 4 of them, some may change 1 and some just need t
 Semi-remote middleware modifies only the meta info of request/response or takes over the control of request/response completely. Authentication middleware would be a perfect example of this scenario. Let's take a closer look at the whole authentication process:
 
 1. Auth middleware gets the request
-2. Check if we can get/verify user info from the request data
+2. Check if we can get/verify user info from the request data:
+
   2.1 Auth successfully, add user info to request and let the request keep going to the next middleware or routing handler.
+  
   2.2 Auth failed, redirect request to a designated location (e.g. login page)
 
 As we can see, if auth successfully the response stream of routing handler could be sent directly back to the client without going through the auth middleware. Or, the response from auth middleware would be sufficient to send to client without touching any other middleware or routing handler in the case of failure authentication. In MicroMono the above semi-remote authentication middleware works like this:
 
-1. MicroMono server gets the request.
+1. MicroMono server gets the request from client.
 2. Proxy the request to right service.
 3. Service gets the request and proxy the request to remote middleware.
 4. Remote middleware does the work and responses to the service.
 5. Depends on the response of remote middleware:
+
   5a. Request will be modified and will be passed to the next handler.
+  
   5b. Response data from middleware will be sent back to the client directly and the original request will not go any further.
+  
 6. The route handler gets the requests and sends response back to micromono server.
 7. Server gets the response and sends back to the client.
 
@@ -214,3 +222,11 @@ As we can see, if auth successfully the response stream of routing handler could
 Fully-remote middleware is easier to understand. It's only a normal middleware running remotely like a proxy. (Currently not supported by micromono)
 
 Having any kind of remote middleware will of course slow down the performance dramatically, but sometimes it's worth it, to reduce the complexity of deployment and provide a more modularized architecture. MicroMono is focused on giving you the most flexibility and allowing you choose the trade-offs.
+
+## RPC
+
+## Front-end asset management
+
+## License
+
+MIT
