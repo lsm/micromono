@@ -11,19 +11,19 @@ MicroMono is a tool that allows you to develop giant, monolithic application in 
 
 ## How It Works
 
-Micromono involves 3 parts of application development at this time:
+MicroMono involves 3 parts of application development at this time:
 
 - **Web framework** (http routing, middleware, page rendering etc.)
 - **Remote procedure calls** (RPC)
 - **Front-end code management** (static asset files of javacript/css).
 
-Sounds familiar, right? Micromono is built with proven, open source frameworks and libraries.  You will find yourself right at home when working with MicroMono if you have ever used any of these tools before.
+Sounds familiar, right? MicroMono is built with proven, open source frameworks and libraries (e.g. [express](http://expressjs.org) and [JSPM](http://jspm.io/)).  You will find yourself right at home when working with MicroMono if you have ever used any of these tools before.
 
 ## Two Components
 
 In MicroMono, you will generally have 2 different types of components:
-- **Server** serves requests directly from clients and proxies to the services behind it.
-- **Service** runs the code which provide the actual feature.
+- **[Server](README.md#server)** serves requests directly from clients and proxies to the services behind it.
+- **[Service](README.md#service)** runs the code which provide the actual feature.
 
 ![](doc/images/1-components.png)
 
@@ -135,8 +135,6 @@ micromono.boot(app).then(function(){
 
 ## Local And Remote
 
-
-
 ![](doc/images/2-mixed.png)
 
 ## Web Framework
@@ -157,7 +155,7 @@ route: {
 - **object key** defines the http method and matching string separated with double colons.
 - **value** could be a function which will be the handler of the path. Or array of functions which contains middleware functions as well as route handler.
 
-Actually you want read more documentation of express to get better understanding of how routing works as micromono basically maps the definition to express. Here is an example of using middleware for a particular route:
+Actually you want read more documentation of express to get better understanding of how routing works as micromono basically maps the definition directly to the express. Here is an example of using middleware for a particular route:
 
 ```javascript
 var bodyParser = require('body-parser');
@@ -173,7 +171,6 @@ module.exports = Service.extend({
     }]
   }
 });
-
 ```
 
 ### Middleware (Middleware as a Service)
@@ -198,9 +195,7 @@ Semi-remote middleware modifies only the meta info of request/response or takes 
   2.1 Auth successfully, add user info to request and let the request keep going to the next middleware or routing handler.
   2.2 Auth failed, redirect request to a designated location (e.g. login page)
 
-As we can see, if auth successfully the response stream of routing handler could be sent directly back to the client without going through the auth middleware. Or, the response from auth middleware would be sufficient to send to client without touching any other middleware or routing handler in the case of failure authentication.
-
-In MicroMono the semi-remote middleware works like this:
+As we can see, if auth successfully the response stream of routing handler could be sent directly back to the client without going through the auth middleware. Or, the response from auth middleware would be sufficient to send to client without touching any other middleware or routing handler in the case of failure authentication. In MicroMono the above semi-remote authentication middleware works like this:
 
 1. MicroMono server gets the request.
 2. Proxy the request to right service.
