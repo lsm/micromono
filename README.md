@@ -25,10 +25,12 @@ In MicroMono, you will generally have 2 different types of components:
     - **Server** serves requests directly from clients and proxies them to the services behind it.
     - **Service** runs the code which provide the actual feature.
 
-![](doc/images/1-components.png)
+![](doc/images/1-components-notitle.png)
 
 
 ### Service
+
+![](doc/images/1-components.png)
 
 A service could have only one RPC endpoint, or it may have a http routing code and client side dependencies. You can think of it as a micro application with everything you need to run that part of the business logic. In current node.js implementation it is also a npm package. So in the `package.json` file you can define npm depedencies as well as the required libraries for client-side code. But, this doesn't mean that you have to write your services in node.js. We will cover more about this topic in section [Development in other languages]().
 
@@ -84,7 +86,8 @@ micromono.require('home');
 micromono.require('account');
 
 // Create an express instance
-// We don't alter the express instance, so you can do what ever you want // to the express instance and they will work as expected.
+// We don't alter the express instance, so you can do what ever you want
+// to the express instance and they will work as expected.
 var app = require('express')();
 
 // boot micromono with the express app
