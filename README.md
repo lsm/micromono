@@ -235,6 +235,10 @@ Having any kind of remote middleware will of course slow down the performance dr
 
 *Coming soon*
 
+## Discuss
+
+On hacker news: https://news.ycombinator.com/item?id=9969201
+
 ## License
 
 MIT
