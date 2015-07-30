@@ -1,6 +1,13 @@
+0.1.16 (2015/07/30)
+===================
+- [Breaking Changes] Use `route` instead of `routes` when define a service.
+- Bug fix for serving asset files.
+
+
 0.1.15 (2015/07/23)
 ===================
 - Bug fix for incorrect path of middleware router.
+
 
 0.1.14 (2015/07/22)
 ===================
