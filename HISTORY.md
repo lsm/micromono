@@ -1,3 +1,9 @@
+0.1.17 (2015)
+===================
+- Load services with command line option `--service`.
+- Allow waiting for services with command line option `--allow-pending`.
+
+
 0.1.16 (2015/07/30)
 ===================
 - [Breaking Changes] Use `route` instead of `routes` when define a service.
