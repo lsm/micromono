@@ -99,6 +99,8 @@ module.exports = Service.extend({
         resolve();
       });
     });
+    // init function should return a promise no matter what
+    return promise;
   }
 });
 ```
