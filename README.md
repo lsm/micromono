@@ -18,7 +18,7 @@ MicroMono involves 3 parts of application development at this time:
 - **Front-end code management** (static asset files of javacript/css).
 
 Sounds familiar, right? MicroMono is built with proven, open source frameworks and libraries (e.g. [express](http://expressjs.org) and [JSPM](http://jspm.io/)).  You will find yourself right at home when working with MicroMono if you have ever used any of these tools before.
-
+<a name="two_components"></a>
 ## Two Components
 
 In MicroMono, you will generally have 2 different types of components:
@@ -26,11 +26,11 @@ In MicroMono, you will generally have 2 different types of components:
 - **[Service](README.md#service)** runs the code which provide the actual feature.
 
 ![](doc/images/1-components.png)
-
+<a name="two_components_service"></a>
 ### Service
 
 A service is a standalone package which groups related features together as an unit. It could have only one RPC endpoint, or it may have a http routing code and client side dependencies. You can think of it as a micro application with everything you need to run that part of the business logic.  In current node.js implementation it is also a npm package. So in the `package.json` file you can define npm depedencies as well as the required libraries for client-side code. But, this doesn't mean that you have to write your services in node.js. We will cover more about this topic in section [Development in other languages](README.md#develop-in-other-languages).
-
+<a name="two_components_service_define_a_service"></a>
 #### Define A Service
 
 Here's an example that shows how to define a simple service which handles http request/response.
@@ -65,9 +65,9 @@ app.get('/hello/:name', function(req, res){
 });
 ```
 
-For more detailed information about http routing, middleware or page rendering please go to [Web Framework](README.md#web-framework).
-
-#### Service Intialization
+For more detailed information about http routing, middleware or page rendering please go to [Web Framework](#web_framework).
+<a name="two_components_service_service_initialization"></a>
+#### Service Initialization
 
 Each service could have an initialization function `init`. You can do some preparation works here. For example, connect to database or setup internal express server. The `init` function takes no arguments and an instance of `Promise` need to be returned. You need to resolve the returned `Promise` after the work has been done or reject it if there's an error. Let's see an example:
 
@@ -105,8 +105,8 @@ module.exports = Service.extend({
 });
 ```
 
-We will discuss more about **running a service** in section [Local And Remote](README.md#local-and-remote)
-
+We will discuss more about **running a service** in section [Local And Remote](#local_and_remote)
+<a name="two_components_server"></a>
 ### Server
 
 The second type is the part which actually glues all the services together and boots up a **server** to serve requests directly from clients.
@@ -134,18 +134,18 @@ micromono.boot(app).then(function(){
     app.listen(3000);
 });
 ```
-
+<a name="local_and_remote"></a>
 ## Local And Remote
 
 As we mentioned at the beginning. The pros and cons of micro-services architecture are obvious and have been widely discussed. MicroMono allows you to **choose the right trade-offs for the right scenario**. If you application has 10 services, you may run all the 10 services on your local dev machine. Or run 1 service which you are developing locally and use the rest 9 of them (stable/finished services) remotely through network. Having a completely different setup for deployment or testing services in parallel? Imagination is your only limitation. The most critical thing is **being able to use any services locally or remotely without knowing the difference or changing the code**. MicroMono gives you this ability by rebuilding the exact service class based on service announcement. This is the most important feature MicroMono brings to the table and you won't feel it as MicroMono does the job behind the scenes. It is true no matter what you are dealing with: http request, RPC or front-end scripts. 
 
 ![](doc/images/2-mixed.png)
 
-
+<a name="web_framework"></a>
 ## Web Framework
 
 MicroMono wraps a thin layer on top of the express framework.  So, existing express applications should be able to easily be ported without any problems.  In this section we will go through 3 topics to understand the web framework part of MicroMono: **[http routing](README.md#http-routing)**, **[middleware](README.md#middleware)** and **[page rendering](README.md#page-rendering)**.
-
+<a name="web_framework_http_routing"></a>
 ### Http routing
 
 As you can see in the earlier example. You could define http routing handlers by putting the definition in the 'route' object property when you extend the 'Service' with following format:
@@ -177,7 +177,7 @@ module.exports = Service.extend({
   }
 });
 ```
-
+<a name="web_framework_middleware"></a>
 ### Middleware
 
 Normally, middleware is just piece of code which can be plugged-in into your routing system to modify the http request or response stream on the fly. In detail, there are 4 things you can alter:
@@ -190,7 +190,7 @@ Normally, middleware is just piece of code which can be plugged-in into your rou
 Some middleware may modify all 4 of them, some may change 1 and some just need the information and do nothing (e.g. logging). Most middleware works fine locally, as they are just some code and don't require external/remote resources. But, some of them you may want to run remotely as services, due to the complexity of the configuration. In MicroMono in order to support remote middleware we separate them into 2 categories: **Semi-remote** and  **Fully-remote** middleware services.
 
 *`Note: When we are talking about remote middleware we mean the ability to use that middleware remotely as a service. Which means you still can use them locally as any other normal middleware you have.`*
-
+<a name="web_framework_middleware_semi_remote_middleware"></a>
 #### Semi-remote middleware
 
 Semi-remote middleware modifies only the meta info of request/response or takes over the control of request/response completely. Authentication middleware would be a perfect example of this scenario. Let's take a closer look at the whole authentication process:
@@ -218,21 +218,21 @@ As we can see, if auth successfully the response stream of routing handler could
 7. Server gets the response and sends back to the client.
 
 ![](doc/images/3-middleware.png)
-
+<a name="web_framework_middleware_fully_remote_middleware"></a>
 #### Fully-remote middleware
 
 Fully-remote middleware is easier to understand. It's only a normal middleware running remotely like a proxy. (Currently not supported by micromono)
 
 Having any kind of remote middleware will of course slow down the performance dramatically, but sometimes it's worth it, to reduce the complexity of deployment and provide a more modularized architecture. MicroMono is focused on giving you the most flexibility and allowing you choose the trade-offs.
-
+<a name="web_framework_page_rendering"></a>
 ### Page rendering
 
 *Coming very soon. Please watch or star the project.*
-
+<a name="rpc"></a>
 ## RPC
 
 *Coming soon*
-
+<a name="front_end_asset_management"></a>
 ## Front-end asset management
 
 *Coming soon*
