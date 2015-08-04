@@ -1,0 +1,11 @@
+h2 /account/login
+
+form(action="/account/login", method="POST")
+  div
+    label(for="username")  Username (micromono) :
+    input(type="text", name="username")
+  div
+    label  Password (123456) :
+    input(type="password", name="password")
+  div
+    input(type="submit", value="Log In")
