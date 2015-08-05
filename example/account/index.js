@@ -94,7 +94,8 @@ var Account = module.exports = Service.extend({
     // get express instance
     var app = this.app;
 
-    // setup a dedicated connect middleware for parsing data and session
+    // setup a dedicated connect middleware for parsing data and session,
+    // so we can reuse it in the `auth` middleware above.
     var connectAuth = connect();
     connectAuth.use(bodyParser.json());
     connectAuth.use(bodyParser.urlencoded({
