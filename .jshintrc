@@ -26,5 +26,5 @@
   "browser": true,
   "node": true,
   "indent": 2,
-  "esnext": false
+  "esnext": true
 }
