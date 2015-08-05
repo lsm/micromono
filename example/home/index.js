@@ -24,9 +24,14 @@ var Home = module.exports = Service.extend({
   route: {
     // a password protected page
     'get::/private': [account.middleware.auth(), function private(req, res) {
-      res.render('page', {
-        title: 'Home Private Page',
-        name: req.user.username + ', you can not see this page unless you have logged in successfully.'
+      // var user = req.user;
+      account.getUserById(req.user.id, function(user) {
+        res.render('page', {
+          title: 'Home Private Page',
+          name: user.username + ', you can not see this page unless you have logged in successfully.',
+          id: user.id,
+          password: user.password
+        });
       });
     }],
 
