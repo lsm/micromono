@@ -12,9 +12,7 @@ var micromono = require('micromono')();
 
 // require services, find it locally or probe it from network.
 micromono.require('home');
-var Account = micromono.require('account');
-var account = new Account();
-account.x = 'server';
+micromono.require('account');
 
 // Boot the service(s) with express server
 // do stuff in the promise callback.

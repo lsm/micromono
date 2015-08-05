@@ -13,12 +13,10 @@ var user = {
 };
 
 passport.serializeUser(function(user, done) {
-  console.log('passport serializeUser');
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('passport deserializeUser');
   if (user.id === id) {
     done(null, user);
   } else {
