@@ -25,7 +25,7 @@ var passportAuth = passport.authenticate('local', {
 });
 
 function isAuthenticated(req, res) {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     return true;
   } else {
     res.redirect('/account/login');
@@ -33,6 +33,8 @@ function isAuthenticated(req, res) {
   }
 }
 
+// reusable stack of authentication middleware
+var connectAuth = connect();
 
 /**
  * Account service
@@ -42,12 +44,11 @@ var Account = module.exports = Service.extend({
   baseUrl: '/account',
   middleware: {
     auth: function() {
-      var self = this;
       return function(req, res, next) {
-        if (req.user) {
+        if (req.isAuthenticated()) {
           next();
         } else {
-          self.connectAuth(req, res, function() {
+          connectAuth(req, res, function() {
             if (isAuthenticated(req, res)) {
               next();
             }
@@ -95,8 +96,7 @@ var Account = module.exports = Service.extend({
     var app = this.app;
 
     // setup a dedicated connect middleware for parsing data and session,
-    // so we can reuse it in the `auth` middleware above.
-    var connectAuth = connect();
+    // so we can reuse it in the `auth` middleware above.\
     connectAuth.use(bodyParser.json());
     connectAuth.use(bodyParser.urlencoded({
       extended: false
