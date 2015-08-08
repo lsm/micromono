@@ -28,6 +28,7 @@
     "async": "1.2.1",
     "connect": "3.4.0",
     "debug": "2.2.0",
+    "eventemitter3": "1.1.1",
     "express": "4.12.4",
     "http-proxy": "1.11.1",
     "jspm": "0.15.7",
