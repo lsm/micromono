@@ -33,8 +33,24 @@ function isAuthenticated(req, res) {
   }
 }
 
-// reusable stack of authentication middleware
+// setup a dedicated connect middleware for parsing data and session,
+// so we can reuse it in the `auth` middleware and the express app.
 var connectAuth = connect();
+
+connectAuth.use(bodyParser.json());
+connectAuth.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+connectAuth.use(cookieParser());
+connectAuth.use(session({
+  secret: 'micromono',
+  resave: true,
+  saveUninitialized: true
+}));
+
+connectAuth.use(passport.initialize());
+connectAuth.use(passport.session());
 
 /**
  * Account service
@@ -94,26 +110,6 @@ var Account = module.exports = Service.extend({
   init: function() {
     // get express instance
     var app = this.app;
-
-    // setup a dedicated connect middleware for parsing data and session,
-    // so we can reuse it in the `auth` middleware above.\
-    connectAuth.use(bodyParser.json());
-    connectAuth.use(bodyParser.urlencoded({
-      extended: false
-    }));
-
-    connectAuth.use(cookieParser());
-    connectAuth.use(session({
-      secret: 'micromono',
-      resave: true,
-      saveUninitialized: true
-    }));
-
-    connectAuth.use(passport.initialize());
-    connectAuth.use(passport.session());
-
-    // save the middleware for later usage
-    this.connectAuth = connectAuth;
 
     // attach the connect auth middleware to our local express app
     app.use(connectAuth);
