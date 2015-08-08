@@ -136,5 +136,5 @@ var Account = module.exports = Service.extend({
 
 // Start the service if this is the main file
 if (require.main === module) {
-  micromono.boot(Account);
+  micromono.startService(Account);
 }

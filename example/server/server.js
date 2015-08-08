@@ -16,7 +16,7 @@ micromono.require('account');
 
 // Boot the service(s) with express server
 // do stuff in the promise callback.
-micromono.boot(app).then(function() {
+micromono.runServer(app).then(function() {
   console.log('server booted');
 
   app.listen(3000);
