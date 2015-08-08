@@ -46,11 +46,11 @@ First, run `account` service by:
 
     DEBUG=micromono* node account/index.js
 
-Second, do the same thing for `home` service:
+Then, do the same thing for `home` service in second terminal:
 
     DEBUG=micromono* node home/index.js
 
-Finally, run our server to start serving requests:
+Finally, run our server to start serving requests in the thrid terminal:
 
     DEBUG=micromono* node server/server.js
 
