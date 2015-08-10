@@ -7,10 +7,11 @@ This is an exmaple shows how you can use expressjs and passportjs togehter with 
 
 ## Quick Start
 
-This example contains 2 services: `account` & `home`:
+This example contains 3 services: `account`, `home` and `io`:
 
 - **[Account](/example/account)** is the service/app which provides login/logout features, auth middleware and a api for getting user by id.
 - **[Home](/example/home)** is the example shows how to use the features provided by the `account` service.
+- **[IO](/example/io)** is a websocket example using socket.io.
 
 We also have a **[server](/example/server)** sub-folder which demostrates how to run the above services together with a existing express application.
 
@@ -38,9 +39,15 @@ In this mode, we use `account` and `home` as normal npm package and everything r
 
 Then open [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
+Or try the `IO` example by running:
+
+    make mono-io
+
+And open [http://127.0.0.1:3000/io](http://127.0.0.1:3000/io)
+
 ### Run it in microservice mode
 
-Also, you can choose to run `account`, `home` and `server` in separate processes. This requires us to run them in three different terminals:
+Also, you can choose to run `account`, `home` and `server` in separate processes. This requires us to run them in three separate terminals:
 
 First, run `account` service by:
 
@@ -52,6 +59,6 @@ Then, do the same thing for `home` service in second terminal:
 
 Finally, run our server to start serving requests in the thrid terminal:
 
-    DEBUG=micromono* node server/server.js
+    DEBUG=micromono* node server/server.js --service account,home
 
 Then open [http://127.0.0.1:3000](http://127.0.0.1:3000)
