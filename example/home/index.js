@@ -21,6 +21,12 @@ var Home = module.exports = Service.extend({
   packagePath: __dirname,
   baseUrl: '/',
 
+  use: {
+    // tell micromono to use `partial-render` middleware at the server side
+    // for request url matching `/account/:page?`.
+    '/:page?': 'partial-render'
+  },
+
   route: {
     // a password protected page
     'get::/private': [account.middleware.auth(), function private(req, res) {

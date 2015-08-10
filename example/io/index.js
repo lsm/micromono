@@ -8,6 +8,12 @@ var IO = module.exports = Service.extend({
   packagePath: __dirname,
   baseUrl: '/io',
 
+  use: {
+    // tell micromono to use `partial-render` middleware at the server side
+    // for request url matching `/io/$`.
+    '/$': 'partial-render'
+  },
+
   route: {
     '/': function(req, res) {
       res.render('index');
