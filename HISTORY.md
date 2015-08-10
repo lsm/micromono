@@ -1,4 +1,25 @@
-0.1.17 (2015)
+0.1.20 (2015/08/10)
+===================
+- Expose http `server` instance to service.
+- Add WebSocket support (handle upgrade request).
+- Add socket.io service example.
+- Add server-side middleware support.
+
+0.1.19 (2015/08/07)
+===================
+- [Breaking changes] Use `startService` and `runServer` instead of `boot` to run service/server.
+- Add `Makefile` for example.
+
+
+0.1.18 (2015/08/05)
+===================
+- Use socket.io as the default transporter for RPC.
+- Only one micromono instance per process.
+- Fully functional express+passport example.
+- Use a separate connect instance for middleware.
+- Some bug fixes.
+
+0.1.17 (2015/07/30)
 ===================
 - Load services with command line option `--service`.
 - Allow waiting for services with command line option `--allow-pending`.
