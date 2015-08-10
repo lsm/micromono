@@ -20,6 +20,7 @@ var IO = module.exports = Service.extend({
 
     // listen to the `server` event
     this.on('server', function(server) {
+      console.log('Please open http://127.0.0.1:3000/io in your browser.');
       // setup socket.io with server
       var io = require('socket.io')(server, {
         path: baseUrl + socketPath
