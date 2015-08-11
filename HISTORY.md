@@ -1,3 +1,7 @@
+0.1.21 (2015/08/11)
+===================
+- Bug fix for asset/jspm.
+
 0.1.20 (2015/08/10)
 ===================
 - Expose http `server` instance to service.

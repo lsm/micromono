@@ -1,7 +1,7 @@
 {
   "name": "micromono",
-  "version": "0.1.20",
-  "description": "Microservice in monolithic style",
+  "version": "0.1.21",
+  "description": "Monolithic micro-services framework",
   "main": "lib/index.js",
   "directories": {
     "example": "example",
@@ -15,9 +15,21 @@
     "url": "https://github.com/lsm/micromono.git"
   },
   "keywords": [
-    "microservice"
+    "microservices",
+    "service",
+    "framework",
+    "micro-services",
+    "monolithic",
+    "web",
+    "rpc",
+    "websockets",
+    "rest",
+    "restful",
+    "router",
+    "app",
+    "api"
   ],
-  "author": "Marc Liu",
+  "author": "lsm <liusenmiao@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lsm/micromono/issues"
