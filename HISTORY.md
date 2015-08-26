@@ -1,3 +1,9 @@
+0.1.22 (2015/08/26)
+===================
+- Generate public path from `jspm.directories.lib` if possible. Otherwise fall back to use `jspm.directories.publicURL`.
+- [Breaking change] New format for defining server middleware in `Service.use`.
+- [Breaking change] Rename built-in middleware `partial-render` to `layout`.
+
 0.1.21 (2015/08/11)
 ===================
 - Bug fix for asset/jspm.
@@ -11,7 +17,7 @@
 
 0.1.19 (2015/08/07)
 ===================
-- [Breaking changes] Use `startService` and `runServer` instead of `boot` to run service/server.
+- [Breaking change] Use `startService` and `runServer` instead of `boot` to run service/server.
 - Add `Makefile` for example.
 
 
