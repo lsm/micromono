@@ -45,7 +45,7 @@ var IO = module.exports = Service.extend({
     // The socketPath is a relative path to the baseUrl of the service.
     // The actuall path for client to connect will be: baseUrl + socketPath,
     // `/io/example-socket` in this case.
-    // Please see `view/index.jade` for example.
+    // Please see `public/io/main.js` for example.
     this.allowUpgrade(socketPath);
 
     // setup express app
