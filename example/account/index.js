@@ -75,9 +75,9 @@ var Account = module.exports = Service.extend({
   },
 
   use: {
-    // tell micromono to use `partial-render` middleware at the server side
+    // tell micromono to use `layout` middleware at the server side
     // for request url matching `/account/:page`.
-    '/:page': 'partial-render'
+    'layout': '/:page'
   },
 
   /**

@@ -9,9 +9,9 @@ var IO = module.exports = Service.extend({
   baseUrl: '/io',
 
   use: {
-    // tell micromono to use `partial-render` middleware at the server side
+    // tell micromono to use `layout` middleware at the server side
     // for request url matching `/io/$`.
-    '/$': 'partial-render'
+    'layout': '/$'
   },
 
   route: {

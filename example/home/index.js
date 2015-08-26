@@ -22,9 +22,9 @@ var Home = module.exports = Service.extend({
   baseUrl: '/',
 
   use: {
-    // tell micromono to use `partial-render` middleware at the server side
-    // for request url matching `/account/:page?`.
-    '/:page?': 'partial-render'
+    // tell micromono to use `layout` middleware at the server side
+    // for request urls in the array.
+    'layout': ['/private', '/public', '/$']
   },
 
   route: {
