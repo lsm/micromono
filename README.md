@@ -5,11 +5,53 @@
 # MicroMono
 [![Join the chat at https://gitter.im/lsm/micromono](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lsm/micromono?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-MicroMono is a tool that allows you to develop giant, monolithic application in micro-service style.  It can also convert existing applications with very little effort. More accurately, it allows people to separate features into **micro-monolithic services/apps** and run them together as **a single system** transparently, just as before.  The micro-services architecture itself [has many benefits](http://eugenedvorkin.com/seven-micro-services-architecture-advantages/) in [different ways](http://damianm.com/articles/human-benefits-of-a-microservice-architecture/).  It becomes increasingly easier and more practical to apply these days due to the widely adopted container virtuallization technologies (e.g. Docker & its ecosystem). But, the micro-services approach is also a [double-edged sword](http://martinfowler.com/articles/microservice-trade-offs.html) and it is of course [not a free lunch](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html).  Sometimes you have to rewrite the entire application to meet the requirements of the new architecture.  Unfortunately, even with the rewrite, the application may not be as elegant and efficient as desired due to the complexity and the costs spiraling out of control.  Micromono's goal is to let you enjoy all the benefits of micro-services while keeping you away from the other edge of the sword.
+MicroMono is a framework for developing **micro-services** in **monolithic** style or reversed. It allows your application to **switch** and **mix** between micro-service/monolithic styles without changing the code. Before they were two things which always connected with `VS`. Now with `micromono` you have the ability to get the best of both worlds.
 
-*`Current implementation of micromono is purely in node.js and is still in its early stages.  We need your help to make it better.  So any suggestions, pull requests or thoughts (design, other languages etc.) are always welcome.  Don't forget to star it on GitHub or share it with others who might be interested.`*
+## Quick Start
 
-## How It Works
+There are several services in the [example folder](https://github.com/lsm/micromono/tree/master/example) to help you get started:
+
+- **account** utilizes passport.js and exposes its authentication features as a service.
+- **home** service uses the features provided by `account` service to protect a private page.
+- **io** illustrates how to use socket.io (websocket) in your application.
+
+You can simply clone this repository and follow the instruction in the example folder to run them on your own machine. The only requirement is Node.js.
+
+*`Current implementation of micromono is purely in node.js and is still in its early stages.  It uses open standards and has a clearly defined service specification so porting to other languages and platforms is possible and encouraged.  We need your help to make it better.  Any suggestions, pull requests or thoughts are always welcome.  Don't forget to star it on GitHub or share it with others.`*
+
+
+# Documentation
+
+## Table Of Contents
+
+- [Intro](#doc_intro)
+- [The Big Picture](#doc_the_big_picture)
+  - [Service](#doc_service)
+    - [Define A Service](#doc_define_a_service)
+    - [Service Initialization](#doc_service_initialization)
+    - [Using Other Service](#doc_using_other_service)
+  - [Balancer](#doc_balancer)
+    - [As Standalone Server](#doc_start_with_command_line)
+    - [With existing application](#doc_use_with_existing_application)
+  - [Local And Remote](#doc_local_and_remote)
+- [Web Framework](#doc_web_framework)
+  - [Http Routing](#doc_http_routing)
+  - [Middleware](#doc_middleware)
+    - [Semi-remote Middleware](#doc_semi_remote_middleware)
+    - [Fully-remote Middleware](#doc_fully_remote_middleware)
+  - [Render Page](#doc_render_page)
+- [RPC](#doc_rpc)
+- [Frontend Scripts Management](#doc_frontend_scripts_management)
+
+
+<a name="doc_intro"></a>
+## Intro
+
+
+The micro-services architecture itself [has many benefits](http://eugenedvorkin.com/seven-micro-services-architecture-advantages/) in [different ways](http://damianm.com/articles/human-benefits-of-a-microservice-architecture/).  It becomes increasingly easier and more practical to apply these days due to the widely adopted container virtuallization technologies (e.g. Docker & its ecosystem). But, the micro-services approach is also a [double-edged sword](http://martinfowler.com/articles/microservice-trade-offs.html) and it is of course [not a free lunch](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html).  Sometimes you have to rewrite the entire application to meet the requirements of the new architecture.  Unfortunately, even with the rewrite, the application may not be as elegant and efficient as desired due to the complexity and the costs spiraling out of control.  Micromono's goal is to let you enjoy all the benefits of micro-services while keeping you away from the other edge of the sword.
+
+<a name="doc_the_big_picture"></a>
+## The Big Picture
 
 MicroMono involves 3 parts of application development at this time:
 
@@ -18,8 +60,6 @@ MicroMono involves 3 parts of application development at this time:
 - **Front-end code management** (static asset files of javacript/css).
 
 Sounds familiar, right? MicroMono is built with proven, open source frameworks and libraries (e.g. [express](http://expressjs.org) and [JSPM](http://jspm.io/)).  You will find yourself right at home when working with MicroMono if you have ever used any of these tools before.
-<a name="two_components"></a>
-## Two Components
 
 In MicroMono, you will generally have 2 different types of components:
 - **[Server](README.md#server)** serves requests directly from clients and proxies to the services behind it.
@@ -137,7 +177,7 @@ micromono.boot(app).then(function(){
 <a name="local_and_remote"></a>
 ## Local And Remote
 
-As we mentioned at the beginning. The pros and cons of micro-services architecture are obvious and have been widely discussed. MicroMono allows you to **choose the right trade-offs for the right scenario**. If you application has 10 services, you may run all the 10 services on your local dev machine. Or run 1 service which you are developing locally and use the rest 9 of them (stable/finished services) remotely through network. Having a completely different setup for deployment or testing services in parallel? Imagination is your only limitation. The most critical thing is **being able to use any services locally or remotely without knowing the difference or changing the code**. MicroMono gives you this ability by rebuilding the exact service class based on service announcement. This is the most important feature MicroMono brings to the table and you won't feel it as MicroMono does the job behind the scenes. It is true no matter what you are dealing with: http request, RPC or front-end scripts. 
+As we mentioned at the beginning. The pros and cons of micro-services architecture are obvious and have been widely discussed. MicroMono allows you to **choose the right trade-offs for the right scenario**. If you application has 10 services, you may run all the 10 services on your local dev machine. Or run 1 service which you are developing locally and use the rest 9 of them (stable/finished services) remotely through network. Having a completely different setup for deployment or testing services in parallel? Imagination is your only limitation. The most critical thing is **being able to use any services locally or remotely without knowing the difference or changing the code**. MicroMono gives you this ability by rebuilding the exact service class based on service announcement. This is the most important feature MicroMono brings to the table and you won't feel it as MicroMono does the job behind the scenes. It is true no matter what you are dealing with: http request, RPC or front-end scripts.
 
 ![](doc/images/2-mixed.png)
 
@@ -199,7 +239,7 @@ Semi-remote middleware modifies only the meta info of request/response or takes 
 2. Check if we can get/verify user info from the request data:
 
   2.1 Auth successfully, add user info to request and let the request keep going to the next middleware or routing handler.
-  
+
   2.2 Auth failed, redirect request to a designated location (e.g. login page)
 
 As we can see, if auth successfully the response stream of routing handler could be sent directly back to the client without going through the auth middleware. Or, the response from auth middleware would be sufficient to send to client without touching any other middleware or routing handler in the case of failure authentication. In MicroMono the above semi-remote authentication middleware works like this:
@@ -211,9 +251,9 @@ As we can see, if auth successfully the response stream of routing handler could
 5. Depends on the response of remote middleware:
 
   5a. Request will be modified and will be passed to the next handler.
-  
+
   5b. Response data from middleware will be sent back to the client directly and the original request will not go any further.
-  
+
 6. The route handler gets the requests and sends response back to micromono server.
 7. Server gets the response and sends back to the client.
 
