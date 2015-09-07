@@ -5,17 +5,17 @@
 # MicroMono
 [![Join the chat at https://gitter.im/lsm/micromono](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lsm/micromono?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-MicroMono is a framework for developing **micro-services** in **monolithic** style or reversed. It allows your application to **switch** and **mix** between micro-service/monolithic styles without changing the code. Before they were two things which always connected with `VS`. Now with `micromono` you have the ability to get the best of both worlds.
+MicroMono is a framework for developing **micro-services** in **monolithic** style or reversed. It allows you to **switch** and **mix** between micro-service/monolithic styles without changing the code. Before they were two things which always connected with **VS**. Now with **micromono** you have the ability to get the best of both worlds.
 
 ## Quick Start
 
-There are several services in the [example folder](https://github.com/lsm/micromono/tree/master/example) to help you get started:
+There are several demos in the [example folder](https://github.com/lsm/micromono/tree/master/example) to help you get started:
 
 - **account** utilizes passport.js and exposes its authentication features as a service.
 - **home** service uses the features provided by `account` service to protect a private page.
 - **io** illustrates how to use socket.io (websocket) in your application.
 
-You can simply clone this repository and follow the instruction in the example folder to run them on your own machine. The only requirement is Node.js.
+You can simply clone this repository and follow the instruction in the example folder to play them on your own machine. The only requirement is Node.js.
 
 *`Current implementation of micromono is purely in node.js and is still in its early stages.  It uses open standards and has a clearly defined service specification so porting to other languages and platforms is possible and encouraged.  We need your help to make it better.  Any suggestions, pull requests or thoughts are always welcome.  Don't forget to star it on GitHub or share it with others.`*
 
@@ -24,15 +24,16 @@ You can simply clone this repository and follow the instruction in the example f
 
 ## Table Of Contents
 
-- [Intro](#doc_intro)
+- [Introduction](#doc_introduction)
 - [The Big Picture](#doc_the_big_picture)
   - [Service](#doc_service)
     - [Define A Service](#doc_define_a_service)
     - [Service Initialization](#doc_service_initialization)
     - [Using Other Service](#doc_using_other_service)
+    - [Service Adapter](#doc_service_adapter)
   - [Balancer](#doc_balancer)
-    - [As Standalone Server](#doc_start_with_command_line)
-    - [With existing application](#doc_use_with_existing_application)
+    - [Using command line](#doc_using_command_line)
+    - [With existing application](#doc_with_existing_application)
   - [Local And Remote](#doc_local_and_remote)
 - [Web Framework](#doc_web_framework)
   - [Http Routing](#doc_http_routing)
@@ -40,20 +41,23 @@ You can simply clone this repository and follow the instruction in the example f
     - [Semi-remote Middleware](#doc_semi_remote_middleware)
     - [Fully-remote Middleware](#doc_fully_remote_middleware)
   - [Render Page](#doc_render_page)
+  - [Framework Adapter](#doc_framework_adapter)
 - [RPC](#doc_rpc)
 - [Frontend Scripts Management](#doc_frontend_scripts_management)
+- [Design](#doc_design)
+  - [Service Announcement Specification](#doc_service_announcement_specification)
 
 
-<a name="doc_intro"></a>
-## Intro
+<a name="doc_introduction"></a>
+## Introduction
 
+Monolithic structure is easy to understand and develop. Because, that is the way how we think when we are designing. But, it becomes a different story when it has more and more features or you want to deploy it to serve hundreds of thousands of users. Then there's micro-services architecture. It [has many benefits](http://eugenedvorkin.com/seven-micro-services-architecture-advantages/) in [different ways](http://damianm.com/articles/human-benefits-of-a-microservice-architecture/).  It becomes increasingly easier and more practical to apply these days due to the widely adopted container virtualization technologies (e.g. Docker & its ecosystem). But, the micro-services approach is also a [double-edged sword](http://martinfowler.com/articles/microservice-trade-offs.html) and it is of course [not a free lunch](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html).  Sometimes you have to rewrite the entire application to meet the requirements of the new architecture.  Unfortunately, even with the rewrite, the application may not be as elegant and efficient as desired due to the complexity and the costs spiraling out of control.  **Micromono's goal is to provide you the flexibility to choose the trade-offs for different circumstances so you could enjoy the best of both worlds.**
 
-The micro-services architecture itself [has many benefits](http://eugenedvorkin.com/seven-micro-services-architecture-advantages/) in [different ways](http://damianm.com/articles/human-benefits-of-a-microservice-architecture/).  It becomes increasingly easier and more practical to apply these days due to the widely adopted container virtuallization technologies (e.g. Docker & its ecosystem). But, the micro-services approach is also a [double-edged sword](http://martinfowler.com/articles/microservice-trade-offs.html) and it is of course [not a free lunch](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html).  Sometimes you have to rewrite the entire application to meet the requirements of the new architecture.  Unfortunately, even with the rewrite, the application may not be as elegant and efficient as desired due to the complexity and the costs spiraling out of control.  Micromono's goal is to let you enjoy all the benefits of micro-services while keeping you away from the other edge of the sword.
 
 <a name="doc_the_big_picture"></a>
 ## The Big Picture
 
-MicroMono involves 3 parts of application development at this time:
+MicroMono involves 3 parts of application development:
 
 - **Web framework** (http routing, middleware, page rendering etc.)
 - **Remote procedure calls** (RPC)
@@ -61,16 +65,17 @@ MicroMono involves 3 parts of application development at this time:
 
 Sounds familiar, right? MicroMono is built with proven, open source frameworks and libraries (e.g. [express](http://expressjs.org) and [JSPM](http://jspm.io/)).  You will find yourself right at home when working with MicroMono if you have ever used any of these tools before.
 
-In MicroMono, you will generally have 2 different types of components:
-- **[Server](README.md#server)** serves requests directly from clients and proxies to the services behind it.
-- **[Service](README.md#service)** runs the code which provide the actual feature.
-
+In MicroMono, there are 2 different types of components:
 ![](doc/images/1-components.png)
-<a name="two_components_service"></a>
+- **[Balancer](#doc_balancer)** serves requests directly from clients and proxies requests to the right services behind it.
+- **[Service](#doc_service)** runs the code which provide the actual feature.
+
+<a name="#doc_service"></a>
 ### Service
 
-A service is a standalone package which groups related features together as an unit. It could have only one RPC endpoint, or it may have a http routing code and client side dependencies. You can think of it as a micro application with everything you need to run that part of the business logic.  In current node.js implementation it is also a npm package. So in the `package.json` file you can define npm depedencies as well as the required libraries for client-side code. But, this doesn't mean that you have to write your services in node.js. We will cover more about this topic in section [Development in other languages](README.md#develop-in-other-languages).
-<a name="two_components_service_define_a_service"></a>
+A service is a standalone package which groups related features together as an unit. It could have only one RPC endpoint, or it may have a http routing code and client side dependencies. You can think of it as a **micro-monolithic application** with everything you need to run that part of the business logic.  In current node.js implementation it is also a npm package. So in the `package.json` file you can define npm dependencies as well as the required libraries for client-side code. But, this doesn't mean that you have to write your services in node.js. We will cover more about this topic in the [design section](#doc_design).
+
+<a name="doc_define_a_service"></a>
 #### Define A Service
 
 Here's an example that shows how to define a simple service which handles http request/response.
@@ -95,7 +100,7 @@ var SimpleHttpService = Service.extend({
 });
 ```
 
-The `'get::/hello/:name': function(req, res){...}` equivalents to:
+The `'get::/hello/:name': function(req, res){...}` part in above example equivalents to:
 
 ```javascript
 var app = express();
@@ -105,11 +110,12 @@ app.get('/hello/:name', function(req, res){
 });
 ```
 
-For more detailed information about http routing, middleware or page rendering please go to [Web Framework](#web_framework).
-<a name="two_components_service_service_initialization"></a>
+For more detailed information about http routing, middleware or page rendering please go to [Web Framework](#doc_web_framework).
+
+<a name="doc_service_initialization"></a>
 #### Service Initialization
 
-Each service could have an initialization function `init`. You can do some preparation works here. For example, connect to database or setup internal express server. The `init` function takes no arguments and an instance of `Promise` need to be returned. You need to resolve the returned `Promise` after the work has been done or reject it if there's an error. Let's see an example:
+Each service could have an initialization function `init`. You can do some preparation works here. For example, connect to database or setup internal express server. The `init` function takes no arguments and an instance of `Promise` could to be returned if have async operation in initialization. You need to resolve the returned `Promise` after the work has been done or reject it if there's an error. Let's see an example:
 
 ```javascript
 var bodyParser = require('body-parser');
@@ -145,13 +151,33 @@ module.exports = Service.extend({
 });
 ```
 
-We will discuss more about **running a service** in section [Local And Remote](#local_and_remote)
-<a name="two_components_server"></a>
-### Server
+<a name="doc_service_adapter"></a>
+#### Service Adapter
 
-The second type is the part which actually glues all the services together and boots up a **server** to serve requests directly from clients.
+By default micromono uses expressjs to handle the web request, uses socket.io for RPC communication. But, people may have different opinions and everyone could be right even they have different preferences. Because, each combination of developers/teams/products is unique and the best choice is always the one that most *"fit"*. That's why we always put flexibility as a high priority factor being considered when designing micromono. We will cover more about this in [Web Framework Adapter](#doc_framework_adapter) and [RPC Adapter](#doc_rpc_adapter).
 
-The **server** code is very simple and straight forward. With a few changes you can have MicroMono running cohesively within your existing [express](http://expressjs.org) server.
+<a name="doc_balancer"></a>
+### Balancer
+
+Balancer sits in front of all services which actually glues all the services together and boots up a **server** to serve requests directly from clients. You can use the command line command `micromono` to start up a balancer if you use micromono exclusively. Or you can have micromono running cohesively within your existing server by adding a few lines of code.
+
+<a name="doc_using_command_line"></a>
+#### Using command line
+
+First we need to install micromono globally:
+
+`npm install -g micromono`
+
+Then go to terminal and run:
+
+`micromono --service service1 --service-dir ./services`
+
+This tells micromono to start the balancer with `service1` and try to find the service in a local directory called `services`. If micromono failed to find the service from local machine it will try to find a service provider from local network. We will discuss more about running [Local And Remote](#doc_local_and_remote) services later.
+
+<a name="doc_with_existing_application"></a>
+#### With existing application
+
+The server code is very simple and straight forward. Below is an example shows how to use micromono together with express server.
 
 ```javascript
 // Require micromono and call to get an instance
@@ -168,24 +194,27 @@ micromono.require('account');
 // to the express instance and they will work as expected.
 var app = require('express')();
 
-// boot micromono with the express app
-micromono.boot(app).then(function(){
+// start balancer with the express app
+micromono.runBalancer(app).then(function(){
     // start serving requests
     app.listen(3000);
 });
 ```
-<a name="local_and_remote"></a>
-## Local And Remote
 
-As we mentioned at the beginning. The pros and cons of micro-services architecture are obvious and have been widely discussed. MicroMono allows you to **choose the right trade-offs for the right scenario**. If you application has 10 services, you may run all the 10 services on your local dev machine. Or run 1 service which you are developing locally and use the rest 9 of them (stable/finished services) remotely through network. Having a completely different setup for deployment or testing services in parallel? Imagination is your only limitation. The most critical thing is **being able to use any services locally or remotely without knowing the difference or changing the code**. MicroMono gives you this ability by rebuilding the exact service class based on service announcement. This is the most important feature MicroMono brings to the table and you won't feel it as MicroMono does the job behind the scenes. It is true no matter what you are dealing with: http request, RPC or front-end scripts.
+<a name="doc_local_and_remote"></a>
+## Local And Remote
 
 ![](doc/images/2-mixed.png)
 
-<a name="web_framework"></a>
+As we mentioned at the beginning. The pros and cons of micro-services architecture are obvious and have been widely discussed. MicroMono allows you to **choose the right trade-offs for the right scenario**. If you application has 10 services, you may run all the 10 services on your local dev machine. Or run 1 service which you are developing locally and use the rest 9 of them (stable/finished services) remotely through network. Having a completely different setup for deployment or testing services in parallel? Imagination is your only limitation. The most critical thing is **being able to use any services locally or remotely without knowing the difference or changing the code**. MicroMono gives you this ability by rebuilding the exact service class based on service announcement. This is the most important feature MicroMono brings to the table and you won't feel it as MicroMono does the job behind the scenes. It is true no matter what you are dealing with: http request, RPC or front-end scripts.
+
+
+<a name="doc_web_framework"></a>
 ## Web Framework
 
-MicroMono wraps a thin layer on top of the express framework.  So, existing express applications should be able to easily be ported without any problems.  In this section we will go through 3 topics to understand the web framework part of MicroMono: **[http routing](README.md#http-routing)**, **[middleware](README.md#middleware)** and **[page rendering](README.md#page-rendering)**.
-<a name="web_framework_http_routing"></a>
+MicroMono wraps a thin layer on top of the other frameworks (express by default). So, existing applications of supported frameworks should be able to easily be ported without any problems.  In this section we will go through 3 topics to understand the web framework part of MicroMono: **[http routing](#doc_http_routing)**, **[middleware](#doc_middleware)** and **[page rendering](#doc_render_page)**.
+
+<a name="doc_http_routing"></a>
 ### Http routing
 
 As you can see in the earlier example. You could define http routing handlers by putting the definition in the 'route' object property when you extend the 'Service' with following format:
@@ -200,7 +229,7 @@ route: {
 - **object key** defines the http method and matching string separated with double colons.
 - **value** could be a function which will be the handler of the path. Or array of functions which contains middleware functions as well as route handler.
 
-Actually you want read more documentation of express to get better understanding of how routing works as micromono basically maps the definition directly to the express. Here is an example of using middleware for a particular route:
+Actually you want read more documentation of the framework being used to get better understanding of how routing works as micromono basically maps the definition directly to the underlying framework. Here is an example of using connect style middleware for a particular route:
 
 ```javascript
 var bodyParser = require('body-parser');
@@ -217,7 +246,7 @@ module.exports = Service.extend({
   }
 });
 ```
-<a name="web_framework_middleware"></a>
+<a name="doc_middleware"></a>
 ### Middleware
 
 Normally, middleware is just piece of code which can be plugged-in into your routing system to modify the http request or response stream on the fly. In detail, there are 4 things you can alter:
@@ -230,7 +259,8 @@ Normally, middleware is just piece of code which can be plugged-in into your rou
 Some middleware may modify all 4 of them, some may change 1 and some just need the information and do nothing (e.g. logging). Most middleware works fine locally, as they are just some code and don't require external/remote resources. But, some of them you may want to run remotely as services, due to the complexity of the configuration. In MicroMono in order to support remote middleware we separate them into 2 categories: **Semi-remote** and  **Fully-remote** middleware services.
 
 *`Note: When we are talking about remote middleware we mean the ability to use that middleware remotely as a service. Which means you still can use them locally as any other normal middleware you have.`*
-<a name="web_framework_middleware_semi_remote_middleware"></a>
+
+<a name="doc_semi_remote_middleware"></a>
 #### Semi-remote middleware
 
 Semi-remote middleware modifies only the meta info of request/response or takes over the control of request/response completely. Authentication middleware would be a perfect example of this scenario. Let's take a closer look at the whole authentication process:
@@ -243,6 +273,8 @@ Semi-remote middleware modifies only the meta info of request/response or takes 
   2.2 Auth failed, redirect request to a designated location (e.g. login page)
 
 As we can see, if auth successfully the response stream of routing handler could be sent directly back to the client without going through the auth middleware. Or, the response from auth middleware would be sufficient to send to client without touching any other middleware or routing handler in the case of failure authentication. In MicroMono the above semi-remote authentication middleware works like this:
+
+![](doc/images/3-middleware.png)
 
 1. MicroMono server gets the request from client.
 2. Proxy the request to right service.
@@ -257,29 +289,86 @@ As we can see, if auth successfully the response stream of routing handler could
 6. The route handler gets the requests and sends response back to micromono server.
 7. Server gets the response and sends back to the client.
 
-![](doc/images/3-middleware.png)
-<a name="web_framework_middleware_fully_remote_middleware"></a>
+Please check out [example/account](https://github.com/lsm/micromono/tree/master/example/account) and [example/home](https://github.com/lsm/micromono/tree/master/example/home) to learn how to make and use a semi-remote middleware.
+
+<a name="doc_fully_remote_middleware"></a>
 #### Fully-remote middleware
 
-Fully-remote middleware is easier to understand. It's only a normal middleware running remotely like a proxy. (Currently not supported by micromono)
+Fully-remote middleware is a normal middleware which requires the request/response data stream go through it during the entire life cycle. MicroMono only supports running fully-remote middleware in the balancer server. Service need to define which middleware to use by using the `use` property:
+
+```javascript
+
+var MyService = module.exports = Service.extend({
+  packagePath: __dirname,
+  baseUrl: '/myservice',
+  use: {
+    // tell micromono to use `layout` middleware at the balancer side
+    // for request which matches url `/myservice/dashboard` (baseUrl + routeUrl).
+    'layout': '/dashboard'
+  },
+
+  route: {
+    '/dashboard': function (req, res) {
+      // a template partial called `dashboard_tpl` will be rendered
+      // and the result will be composed by `layout` middleware to generate the final page
+      res.render('dashboard_tpl');
+    }
+  }
+});
+
+```
 
 Having any kind of remote middleware will of course slow down the performance dramatically, but sometimes it's worth it, to reduce the complexity of deployment and provide a more modularized architecture. MicroMono is focused on giving you the most flexibility and allowing you choose the trade-offs.
-<a name="web_framework_page_rendering"></a>
-### Page rendering
 
-*Coming very soon. Please watch or star the project.*
-<a name="rpc"></a>
+<a name="doc_render_page"></a>
+### Render Page
+
+Page rendering is a common task for web framework and you probably need some kind of template reuse if your application have multiple pages. Typical case is header, footer and layout templates are shared among pages and each page only provides the different part. But, think about what we should do if these pages are rendered by different services which not physically located on a same machine. A simple way is to have a copy of the shared template files for each service deployed. Or we can use the built-in middleware [layout](https://github.com/lsm/micromono/tree/master/middleware/layout.js) to compose the contents of each page with shared templates:
+
+![](doc/images/4-render-page.png)
+
+```javascript
+
+var Profile = module.exports = Service.extend({
+  packagePath: __dirname,
+  baseUrl: '/',
+
+  use: {
+    // tell micromono to use `layout` middleware at the balancer side
+    // for request which matches following urls in the array.
+    'layout': ['/profile', '/$']
+  },
+
+  route: {
+
+    '/': function(req, res) {
+      // response will be re-rendered by `layout` middleware in the balancer process
+    },
+
+    'get::/profile': function (req, res) {
+      // response will be re-rendered by `layout` middleware in the balancer process
+    },
+
+    'post::/upload': function (req, res) {
+      // this will not be touched by `layout` as it doesn't match the url
+    }
+  }
+});
+```
+
+<a name="doc_rpc"></a>
 ## RPC
 
-*Coming soon*
-<a name="front_end_asset_management"></a>
-## Front-end asset management
+![](doc/images/5-rpc.png)
 
-*Coming soon*
+<a name="doc_frontend_scripts_management"></a>
+## Frontend Scripts Management
+
+![](doc/images/6-asset.png)
 
 ## Discuss
 
-On hacker news: https://news.ycombinator.com/item?id=9969201
+On hacker news: https://news.ycombinator.com/item?id=10157418
 
 ## License
 
