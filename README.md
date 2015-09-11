@@ -9,6 +9,10 @@ MicroMono is a framework for developing **micro-services** in **monolithic** sty
 
 ## Quick Start
 
+The easiest way to use micromono is to install it through [npm](https://www.npmjs.com/):
+
+`npm install micromono`
+
 There are several demos in the [example folder](https://github.com/lsm/micromono/tree/master/example) to help you get started:
 
 - **account** utilizes passport.js and exposes its authentication features as a service.
