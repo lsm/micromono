@@ -322,12 +322,12 @@ var MyService = module.exports = Service.extend({
 
 ```
 
-Having any kind of remote middleware will of course slow down the performance dramatically, but sometimes it's worth it, to reduce the complexity of deployment and provide a more modularized architecture. MicroMono is focused on giving you the most flexibility and allowing you choose the trade-offs.
+Having any kind of remote middleware will of course slow down the performance dramatically, but sometimes it's worth it, to reduce the complexity of deployment and provide a more modularized architecture. MicroMono is focused on giving you the most flexibility while allowing you to choose the trade-offs.
 
 <a name="doc_render_page"></a>
 ### Render Page
 
-Page rendering is a common task for web framework and you probably need some kind of template reuse if your application have multiple pages. Typical case is header, footer and layout templates are shared among pages and each page only provides the different part. But, think about what we should do if these pages are rendered by different services which not physically located on a same machine. A simple way is to have a copy of the shared template files for each service deployed. Or we can use the built-in middleware [layout](https://github.com/lsm/micromono/tree/master/lib/middleware/layout.js) to compose the contents of each page with shared templates:
+Page rendering is a common task for web framework and you will probably need some kind of template reuse if your application has multiple pages. A typical case is header, footer and layout templates which are shared among pages and each page only provides the different part. But, think about what we should do if these pages are rendered by different services which are not physically located on a same machine. A simple way is to have a copy of the shared template files for each service deployed. Or we can use the built-in middleware [layout](https://github.com/lsm/micromono/tree/master/lib/middleware/layout.js) to compose the contents of each page with shared templates:
 
 ![](doc/images/4-render-page.png)
 
