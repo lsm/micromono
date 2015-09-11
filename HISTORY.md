@@ -1,3 +1,8 @@
+0.1.23 (2015/09/10)
+===================
+- Allow setting upgrade url in service definition.
+- Allow setting service name by using `Service#name`.
+
 0.1.22 (2015/08/26)
 ===================
 - Generate public path from `jspm.directories.lib` if possible. Otherwise fall back to use `jspm.directories.publicURL`.
