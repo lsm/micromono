@@ -3,7 +3,9 @@
 </p>
 
 # MicroMono
-[![Codacy Badge](https://api.codacy.com/project/badge/84bbaf9b08b74f5483f59ce201eb1ee3)](https://www.codacy.com/app/liusenmiao/micromono)
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+[![Code Climate](https://codeclimate.com/github/lsm/micromono/badges/gpa.svg)](https://codeclimate.com/github/lsm/micromono)
 [![Join the chat at https://gitter.im/lsm/micromono](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lsm/micromono?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 MicroMono is a framework for developing **micro-services** in **monolithic** style or reversed. It allows you to **switch** and **mix** between micro-service/monolithic styles without changing the code. Before they were two things which always connected with **VS**. Now with **micromono** you have the ability to get the best of both worlds.
@@ -378,3 +380,8 @@ On hacker news: https://news.ycombinator.com/item?id=10157418
 ## License
 
 MIT
+
+
+[npm-url]: https://npmjs.org/package/micromono
+[npm-image]: http://img.shields.io/npm/v/micromono.svg
+[downloads-image]: http://img.shields.io/npm/dm/micromono.svg
