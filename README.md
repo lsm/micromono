@@ -3,6 +3,8 @@
 </p>
 
 # MicroMono
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
 [![Codacy Badge](https://api.codacy.com/project/badge/84bbaf9b08b74f5483f59ce201eb1ee3)](https://www.codacy.com/app/liusenmiao/micromono)
 [![Join the chat at https://gitter.im/lsm/micromono](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lsm/micromono?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -378,3 +380,8 @@ On hacker news: https://news.ycombinator.com/item?id=10157418
 ## License
 
 MIT
+
+
+[npm-url]: https://npmjs.org/package/micromono
+[npm-image]: http://img.shields.io/npm/v/micromono.svg
+[downloads-image]: http://img.shields.io/npm/dm/micromono.svg
