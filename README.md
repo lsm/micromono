@@ -3,6 +3,7 @@
 </p>
 
 # MicroMono
+[![License MIT][license]](http://opensource.org/licenses/MIT)
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
 [![Code Climate](https://codeclimate.com/github/lsm/micromono/badges/gpa.svg)](https://codeclimate.com/github/lsm/micromono)
@@ -384,4 +385,5 @@ MIT
 
 [npm-url]: https://npmjs.org/package/micromono
 [npm-image]: http://img.shields.io/npm/v/micromono.svg
+[license]: https://img.shields.io/npm/l/micromono.svg
 [downloads-image]: http://img.shields.io/npm/dm/micromono.svg
