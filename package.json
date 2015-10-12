@@ -38,6 +38,8 @@
   "dependencies": {
     "ampersand-class-extend": "1.0.2",
     "async": "1.2.1",
+    "axon": "^2.0.2",
+    "commander": "^2.8.1",
     "connect": "3.4.0",
     "debug": "2.2.0",
     "eventemitter3": "1.1.1",
