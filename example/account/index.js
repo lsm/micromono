@@ -126,15 +126,17 @@ var Account = module.exports = Service.extend({
     return Promise.resolve();
   },
 
-  getUserById: function(id, callback) {
-    if (id === 1) {
-      callback({
-        id: 1,
-        username: 'micromono',
-        password: '123456'
-      });
-    } else {
-      callback(null);
+  api: {
+    getUserById: function(id, callback) {
+      if (id === 1) {
+        callback({
+          id: 1,
+          username: 'micromono',
+          password: '123456'
+        });
+      } else {
+        callback(null);
+      }
     }
   }
 });
