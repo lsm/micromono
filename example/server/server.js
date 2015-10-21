@@ -12,7 +12,7 @@ var micromono = require('micromono')();
 
 // Boot the service(s) with express server
 // do stuff in the promise callback.
-micromono.runServer(app).then(function() {
+micromono.startBalancer(app).then(function() {
   console.log('server booted');
 
   app.listen(3000);
