@@ -1,3 +1,50 @@
+0.1.26 (2015/10/23)
+===================
+- [Breaking] Functions will be treated as rpc only when they are defined under
+property `api` when you extend a Service.
+
+```javascript
+var MyService = Service.extend({
+
+  // functions defined under `api` property will be exposed through rpc.
+  api: {
+    // this function could be called remotely like this:
+    // myService.api.rpcMethod()
+    rpcMethod: function() {
+      // body...
+    }
+  }
+
+  // this will not be exposed as a rpc endpoint
+  myServiceFunc: function() {
+    // body...
+  }
+})
+```
+
+- Rewrite and reorganize code to an adaptive style to support different web
+frameworks and rpc transporters through adapters.
+- Add standalone service manager class.
+- Add standalone scheduler class.
+- `micromono()` now returns an instance of `MicroMonoServer` class.
+- Use `axon` as default rpc transporter.
+- Use `cmdenv` to unify settings from environment and command line options.
+- Change to no semicolon coding style.
+- Add lots of debugging info.
+
+
+0.1.25 (2015/09/18)
+===================
+- Support mounting multiple `publicURL` to the same local asset directory.
+
+
+0.1.24 (2015/09/12)
+===================
+- Upgrade jspm to version 0.16.2
+- Use `jspm.directories.baseURL` instead of `jspm.directories.lib` as directory
+of local static asset.
+
+
 0.1.23 (2015/09/10)
 ===================
 - Allow setting upgrade url in service definition.
