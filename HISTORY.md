@@ -1,3 +1,10 @@
+0.1.27 (2015/10/26)
+===================
+- Bug fix for setting http server for services.
+- Bug fix for merge and install jspm dependencies.
+- Get micromono specific settings from property `micromono` of package.json.
+
+
 0.1.26 (2015/10/23)
 ===================
 - [Breaking] Functions will be treated as rpc only when they are defined under
