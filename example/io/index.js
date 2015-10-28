@@ -32,6 +32,7 @@ var IO = module.exports = Service.extend({
     // Calling `allowUpgrade` with no arguments will return
     // the full url (baseUrl + upgradeUrl) which accepts upgrade request
     var socketPath = this.allowUpgrade();
+    console.log('socket.io path', socketPath);
     // You can override the above defined `upgradeUrl` by calling `allowUpgrade`
     // with new url string you want
     // this.allowUpgrade('/my/new-socket');
