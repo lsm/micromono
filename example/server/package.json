@@ -13,7 +13,7 @@
     "express": "^4.13.1",
     "jade": "^1.11.0",
     "jspm": "^0.15.7",
-    "micromono": "0.1.23"
+    "micromono": "0.1.28"
   },
   "jspm": {
     "directories": {
