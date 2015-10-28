@@ -1,3 +1,10 @@
+0.1.28 (2015/10/28)
+===================
+- Bug fix for setting/getting upgrade url.
+- Bug fix for proxying websockets request.
+- Bug fix for `setHttpServer`
+
+
 0.1.27 (2015/10/26)
 ===================
 - Bug fix for setting http server for services.
