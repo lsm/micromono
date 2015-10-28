@@ -15,6 +15,9 @@
     "jspm": "^0.15.7",
     "micromono": "0.1.28"
   },
+  "micromono": {
+    "publicURL": "/public"
+  },
   "jspm": {
     "directories": {
       "baseURL": "public"
