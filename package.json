@@ -3,6 +3,9 @@
   "version": "0.1.28",
   "description": "Monolithic micro-services framework",
   "main": "lib/index.js",
+  "bin": {
+    "micromono": "./bin/micromono"
+  },
   "directories": {
     "example": "example",
     "lib": "lib"
@@ -39,20 +42,17 @@
     "ampersand-class-extend": "1.0.2",
     "async": "1.4.2",
     "axon": "2.0.2",
-    "cmdenv": "0.1.0",
+    "cmdenv": "0.2.0",
     "debug": "2.2.0",
     "eventemitter3": "1.1.1",
     "express": "4.13.3",
     "http-proxy": "1.11.2",
-    "jspm": "0.16.12",
+    "jspm": "0.16.13",
     "lodash.assign": "3.2.0",
     "lodash.difference": "3.2.2",
     "lodash.isarray": "3.0.4",
     "lodash.merge": "3.3.2",
     "lodash.toarray": "3.0.2",
-    "minimist": "1.2.0",
-    "random-port": "0.1.0",
-    "shortid": "2.2.2",
-    "weighted-round-robin": "^2.0.2"
+    "weighted-round-robin": "2.0.2"
   }
 }
