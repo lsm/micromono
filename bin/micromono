@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var program = require('../lib/argv')
+
+
+program
+  .version('0.0.1')
+  .command('asset [options]', 'Asset sub command. Run `micromono asset -h` for usage.')
+  .parse(process.argv)

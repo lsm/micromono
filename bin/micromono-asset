@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+var path = require('path')
+var Asset = require('../lib/web/asset')
+var program = require('cmdenv')('micromono')
+// var program = require('../lib/argv') // use this to share options
+
+program
+  .option('-b --bundle <path>', 'Bundle js/css for package inside `path`.')
+  .option('-D --bundle-deps', 'Include dependencies when bundling. Default false.')
+  .option('-o --out-file [path]', 'Set the path of the output file.')
+  .option('-s --source-maps', 'Enable source maps. Default false. Default false.')
+  .option('--source-map-contents', 'Default false.')
+  .option('--low-res-source-maps', 'Generate low resolution source maps. Default true.')
+  .option('-i --inject', 'Inject bundle info into `config.js`. Default true.')
+  .option('-m --minify', 'Minify the output files. Default true.')
+  .option('--mangle', 'Default true.')
+  .option('-c --build-css', 'Build CSS files. Default true.')
+  .option('-a --separate-css', 'Bundle CSS into a separate file. Default true.')
+  .parse(process.argv)
+
+
+if (program.bundle) {
+  var packagePath = path.resolve(program.bundle)
+
+  var asset = new Asset(packagePath)
+  asset.parseJSPM()
+
+  var options = {
+    sourceMaps: program.sourceMaps || false,
+    sourceMapContents: program.sourceMapContents || false,
+    lowResSourceMaps: program.lowResSourceMaps || true,
+    inject: program.inject || true,
+    minify: program.minify || true,
+    mangle: program.mangle || true,
+    buildCss: program.buildCss || true,
+    separateCss: program.separateCss || true
+  }
+
+  if (program.outFile) {
+    options.outFile = program.outFile
+  }
+
+  asset.bundle(options)
+
+} else {
+  console.error('\n    option `--bundle` is required to build the bundle.\n')
+  process.exit(1)
+}
+
