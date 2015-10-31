@@ -1,3 +1,13 @@
+0.1.30 (2015/10/30)
+===================
+- Bundle static asset on the fly with option `-a` or `--bundle-asset`
+
+
+0.1.29 (2015/10/30)
+===================
+- Add command `micromono asset` for building asset files.
+
+
 0.1.28 (2015/10/28)
 ===================
 - Bug fix for setting/getting upgrade url.
