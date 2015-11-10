@@ -19,12 +19,12 @@ var account = new Account();
  */
 var Home = module.exports = Service.extend({
   packagePath: __dirname,
-  baseUrl: '/',
+  baseUrl: '/home',
 
   use: {
     // tell micromono to use `layout` middleware at the server side
     // for request urls in the array.
-    'layout': ['/private', '/public$', '/$']
+    'layout': ['/private$', '^/public$', '^/$']
   },
 
   route: {
@@ -41,14 +41,14 @@ var Home = module.exports = Service.extend({
       });
     }],
 
-    'get::/public': function public(req, res) {
+    'get::^/public': function public(req, res) {
       res.render('page', {
         title: 'Home Public Page',
         name: 'anonymouse'
       });
     },
 
-    'get::/': function index(req, res) {
+    'get::^/': function index(req, res) {
       res.render('index');
     }
   },

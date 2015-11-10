@@ -13,7 +13,7 @@
     "express": "^4.13.1",
     "jade": "^1.11.0",
     "jspm": "^0.15.7",
-    "micromono": "0.1.28"
+    "micromono": "0.1.x"
   },
   "micromono": {
     "publicURL": "/public"
@@ -26,9 +26,9 @@
       "socket.io-client": "github:socketio/socket.io-client@^1.3.6"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.1.13",
-      "babel-runtime": "npm:babel-runtime@^5.1.13",
-      "core-js": "npm:core-js@^0.9.4"
+      "babel": "npm:babel-core@5.8.29",
+      "babel-runtime": "npm:babel-runtime@5.8.29",
+      "core-js": "npm:core-js@1.2.3"
     }
   }
 }
