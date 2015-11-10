@@ -1,6 +1,10 @@
+0.1.31 (2015/11/09)
+===================
+- Support using `^` to override `baseUrl`.
+
 0.1.30 (2015/10/30)
 ===================
-- Bundle static asset on the fly with option `-a` or `--bundle-asset`
+- Bundle static asset on the fly with option `-a` or `--bundle-asset`.
 
 
 0.1.29 (2015/10/30)
