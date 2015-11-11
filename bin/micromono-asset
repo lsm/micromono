@@ -9,7 +9,7 @@ program
   .option('-b --bundle <path>', 'Bundle js/css for package inside `path`.')
   .option('-D --bundle-deps', 'Include dependencies when bundling. Default false.')
   .option('-o --out-file [path]', 'Set the path of the output file.')
-  .option('-s --source-maps', 'Enable source maps. Default false. Default false.')
+  .option('--source-maps', 'Enable source maps. Default false.')
   .option('--source-map-contents', 'Default false.')
   .option('--low-res-source-maps', 'Generate low resolution source maps. Default true.')
   .option('-i --inject', 'Inject bundle info into `config.js`. Default true.')
@@ -27,6 +27,7 @@ if (program.bundle) {
   asset.parseJSPM()
 
   var options = {
+    bundleDeps: program.bundleDeps || false,
     sourceMaps: program.sourceMaps || false,
     sourceMapContents: program.sourceMapContents || false,
     lowResSourceMaps: program.lowResSourceMaps || true,
