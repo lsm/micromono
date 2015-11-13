@@ -1,9 +1,20 @@
 doctype html
 html
   head
+
+    if mainBundleCss
+      link(type="text/css", rel="stylesheet", href="#{mainBundleCss}")
+
     script(src="/public/jspm_packages/system.js")
     script(src="/public/config.js")
+
+    if !asset.bundleDeps && mainBundleJs
+      script(type="text/javascript", src="#{mainBundleJs}")
+
   body
+    if mainEntryJs
+      script(type='text/javascript').
+        System.import('#{mainEntryJs}');
     h1
       a(href="/") MicroMono Example
 

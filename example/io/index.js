@@ -18,8 +18,8 @@ var IO = module.exports = Service.extend({
 
   use: {
     // Tell micromono to use `layout` middleware at the balancer side
-    // for request url matching `/io/$`.
-    'layout': '/$'
+    // for request url matching `/io$`.
+    'layout': '^/io$'
   },
 
   route: {
@@ -39,7 +39,7 @@ var IO = module.exports = Service.extend({
 
     // listen to the `server` event
     this.on('server', function(server) {
-      console.log('Please open http://127.0.0.1:3000/io in your browser.');
+      console.log('Please open http://127.0.0.1:3000/io in your browser (no trailing slash).');
       // setup socket.io with server
       var io = require('socket.io')(server, {
         path: socketPath

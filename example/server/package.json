@@ -10,15 +10,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.1",
-    "jade": "^1.11.0",
-    "jspm": "^0.15.7",
+    "express": "4.13.1",
+    "jade": "1.11.0",
+    "jspm": "0.16.14",
     "micromono": "0.1.x"
   },
   "micromono": {
     "publicURL": "/public"
   },
   "jspm": {
+    "main": "main.js",
     "directories": {
       "baseURL": "public"
     },
@@ -28,7 +29,8 @@
     "devDependencies": {
       "babel": "npm:babel-core@5.8.29",
       "babel-runtime": "npm:babel-runtime@5.8.29",
-      "core-js": "npm:core-js@1.2.3"
+      "core-js": "npm:core-js@1.2.3",
+      "css": "github:systemjs/plugin-css@0.1.12"
     }
   }
 }

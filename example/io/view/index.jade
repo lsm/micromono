@@ -1,8 +1,12 @@
-body
+div
   h1 MicroMono Socket.IO Example
 
   h3 Message from server (emits every 2 seconds):
   div#message
 
-  script(type='text/javascript').
-    System.import('io/main');
+  if asset && asset.urls && asset.urls.bundleJs
+    script(type='text/javascript', src="#{asset.urls.bundleJs}")
+
+  if asset && asset.main
+    script(type='text/javascript').
+      System.import('#{asset.main}');

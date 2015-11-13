@@ -15,5 +15,18 @@ var micromono = require('micromono')();
 micromono.startBalancer(app).then(function() {
   console.log('server booted');
 
+  var assetInfo = micromono.asset.jspmInfo
+
+  if (assetInfo.urls.bundleJs) {
+    app.locals.mainBundleJs = assetInfo.urls.bundleJs
+  }
+  if (assetInfo.urls.bundleCss) {
+    app.locals.mainBundleCss = assetInfo.urls.bundleCss
+  }
+
+  if (assetInfo.main) {
+    app.locals.mainEntryJs = assetInfo.main
+  }
+
   app.listen(3000);
 });
