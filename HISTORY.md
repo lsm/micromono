@@ -1,3 +1,8 @@
+0.1.32 (2015/11/13)
+===================
+- Expose more asset info in service announcement.
+- Fix bugs for bundling asset.
+
 0.1.31 (2015/11/09)
 ===================
 - Support using `^` to override `baseUrl`.
