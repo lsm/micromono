@@ -12,17 +12,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-  bundles: {
-    "bundle-server.js": [
-      "github:socketio/socket.io-client@1.3.7",
-      "github:socketio/socket.io-client@1.3.7/socket.io",
-      "main.js",
-      "style.css!github:systemjs/plugin-css@0.1.19"
-    ],
-    "bundle-io.js": [
-      "io/main.js"
-    ]
-  },
+
   buildCSS: true,
   separateCSS: true,
 
