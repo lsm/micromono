@@ -1,0 +1,36 @@
+{
+  "indent": {
+    "value": "  ",
+    "FunctionExpression": 1,
+    "ArrayExpression": 1,
+    "ObjectExpression": 1
+  },
+
+  "lineBreak": {
+    "before": {
+      "ElseStatement": 0,
+      "ElseIfStatement": 0,
+      "FunctionDeclaration": ">=1",
+      "FunctionDeclarationOpeningBrace": 0,
+      "FunctionDeclarationClosingBrace": ">=1",
+      "FunctionExpressionOpeningBrace": 0
+    },
+    "after": {
+      "FunctionDeclaration": ">=1",
+      "FunctionDeclarationOpeningBrace": 1
+    }
+  },
+
+  "whiteSpace": {
+    "before": {
+      "FunctionDeclaration": 1,
+      "FunctionExpressionOpeningBrace": 1,
+      "FunctionExpressionClosingBrace": 1
+    },
+    "after": {
+      "FunctionName": 0,
+      "FunctionExpressionOpeningBrace": 0,
+      "FunctionExpressionClosingBrace": 0
+    }
+  }
+}
