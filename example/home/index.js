@@ -2,17 +2,17 @@
  * Module dependencies
  */
 
-var path = require('path');
-var bodyParser = require('body-parser');
+var path = require('path')
+var bodyParser = require('body-parser')
 
 // setup micromono
-var MicroMono = require('micromono');
-var Service = MicroMono.Service;
-var micromono = new MicroMono();
+var MicroMono = require('micromono')
+var Service = MicroMono.Service
+var micromono = new MicroMono()
 
 // require account service
-var Account = micromono.require('account');
-var account = new Account();
+var Account = micromono.require('account')
+var account = new Account()
 
 /**
  * Example service which render pages and use other service as dependency.
@@ -24,32 +24,36 @@ var Home = module.exports = Service.extend({
   use: {
     // tell micromono to use `layout` middleware at the server side
     // for request urls in the array.
-    'layout': ['/private$', '^/public$', '^/$']
+    'layout': ['/private$', '^/public$', '^/$', '/:username/:project']
   },
 
   route: {
     // a password protected page
-    'get::/private': [account.middleware.auth(), function private(req, res) {
-      // var user = req.user;
+    'get::/private': [account.middleware.auth(), function privatePage(req, res) {
+      // var user = req.user
       account.api.getUserById(req.user.id, function(user) {
         res.render('page', {
           title: 'Home Private Page',
           name: user.username + ', you can not see this page unless you have logged in successfully.',
           id: user.id,
           password: user.password
-        });
-      });
+        })
+      })
     }],
 
-    'get::^/public': function public(req, res) {
+    'get::^/public': function publicPage(req, res) {
       res.render('page', {
         title: 'Home Public Page',
         name: 'anonymouse'
-      });
+      })
     },
 
     'get::^/': function index(req, res) {
-      res.render('index');
+      res.render('index')
+    },
+
+    'get::/:username/:project': function(req, res) {
+      res.send([req.params.username, req.params.project].join('/'))
     }
   },
 
@@ -60,20 +64,20 @@ var Home = module.exports = Service.extend({
    * @return {Promise}
    */
   init: function() {
-    var app = this.app;
+    var app = this.app
 
     app.use(bodyParser.urlencoded({
       extended: false
-    }));
+    }))
 
-    app.set('views', path.join(__dirname, './view'));
-    app.set('view engine', 'jade');
+    app.set('views', path.join(__dirname, './view'))
+    app.set('view engine', 'jade')
 
-    return Promise.resolve();
+    return Promise.resolve()
   }
-});
+})
 
 // Start the service if this is the main file
 if (require.main === module) {
-  micromono.startService(Home);
+  micromono.startService(Home)
 }

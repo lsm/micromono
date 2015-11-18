@@ -8,7 +8,7 @@ html
     script(src="/public/jspm_packages/system.js")
     script(src="/public/config.js")
 
-    if !asset.bundleDeps && mainBundleJs
+    if (asset && !asset.bundleDeps) && mainBundleJs
       script(type="text/javascript", src="#{mainBundleJs}")
 
   body
