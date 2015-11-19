@@ -95,7 +95,7 @@ var Account = module.exports = Service.extend({
       }
     },
 
-    'get::^/logout': function logout(req, res) {
+    'post::^/logout': function logout(req, res) {
       req.logout();
       res.redirect('/account/login');
     },

@@ -1,4 +1,5 @@
 h2  /account/protected
 h3  Hello #{name}, you can not see this page unless you have logged in successfully.
 h4  Click to
-  a(href="/logout")  Logout
+form(action="/logout", method="POST")
+  button(type="submit") Logout
