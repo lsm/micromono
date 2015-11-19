@@ -52,8 +52,25 @@ var Home = module.exports = Service.extend({
       res.render('index')
     },
 
-    'get::/:username/:project': function(req, res) {
-      res.send([req.params.username, req.params.project].join('/'))
+    'get::/project/:project/:id': function(req, res) {
+      res.send(['project', req.params.project, req.params.id].join('/'))
+    },
+
+    'get::/user/:name': function(req, res) {
+      var context = {
+        name: req.params.name
+      }
+      var accept = req.accepts(['html', 'json'])
+      if ('json' === accept) {
+        // We don't need the rendered content here as
+        // this is probably a api xhr request. (Client side rendering)
+        res.json(context)
+      } else {
+        // A html page request, send the rendered data for first page load.
+        // (Server side rendering)
+        context.yield = 'this is data rendered for page'
+        res.json(context)
+      }
     }
   },
 
