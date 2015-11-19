@@ -2,7 +2,7 @@ MicroMono express + passport example
 ====================================
 
 
-This is an exmaple shows how you can use expressjs and passportjs togehter with micromono to create a simple web app with password protected page. The most important feature micromono provides is the ability to run services either in one process or run them individually in different processes or machines, aka. remote services.
+This is an exmaple shows how you can use expressjs and passportjs together with micromono to create a simple web app with password protected page. The most important feature micromono provides is the ability to run services either in one process or run them individually in different processes or machines, aka. remote services.
 
 
 ## Quick Start
