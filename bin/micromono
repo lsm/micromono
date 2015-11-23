@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-var program = require('../lib/argv')
+var program = require('cmdenv')('micromono')
 
 
 program
-  .version('0.0.1')
-  .command('asset [options]', 'Asset sub command. Run `micromono asset -h` for usage.')
+  .version('0.1.34')
+  .usage('[options] command [arg...]')
+  .command('bundle [options] path', 'Bundle asset files for given service path')
+  .command('balancer [options] path', 'Start a balancer from path')
+  .command('service [options] path', 'Start a service from path')
   .parse(process.argv)
