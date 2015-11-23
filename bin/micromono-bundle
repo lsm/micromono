@@ -3,27 +3,27 @@
 var path = require('path')
 var Asset = require('../lib/web/asset')
 var program = require('cmdenv')('micromono')
-// var program = require('../lib/argv') // use this to share options
 
 program
-  .option('-b --bundle <path>', 'Bundle js/css for package inside `path`.')
-  .option('-D --bundle-deps', 'Include dependencies when bundling. Default false.')
+  .usage('[options] path')
+  .description('Bundle asset files for given service path')
+  .option('-d --bundle-deps', 'Include dependencies when bundling. Default false.')
   .option('-o --out-file [path]', 'Set the path of the output file.')
   .option('--source-maps', 'Enable source maps. Default false.')
-  .option('--source-map-contents', 'Default false.')
+  .option('-m --source-map-contents', 'Enable source maps. Default false.')
   .option('--low-res-source-maps', 'Generate low resolution source maps. Default true.')
   .option('-i --inject', 'Inject bundle info into `config.js`. Default true.')
-  .option('-m --minify', 'Minify the output files. Default true.')
-  .option('--mangle', 'Default true.')
-  .option('-c --build-css', 'Build CSS files. Default true.')
-  .option('-a --separate-css', 'Bundle CSS into a separate file. Default true.')
+  .option('-z --minify', 'Minify the output files. Default true.')
+  .option('-g --mangle', 'Default true.')
+  .option('-c --bundle-css', 'Bundle CSS files. Default true.')
+  .option('-s --separate-css', 'Bundle CSS into a separate file. Default true.')
   .parse(process.argv)
 
+var servicePath = program.args[0]
+if (servicePath) {
+  servicePath = path.resolve(servicePath)
 
-if (program.bundle) {
-  var packagePath = path.resolve(program.bundle)
-
-  var asset = new Asset(packagePath)
+  var asset = new Asset(servicePath)
   asset.parseJSPM()
 
   var options = {
@@ -45,7 +45,7 @@ if (program.bundle) {
   asset.bundle(options)
 
 } else {
-  console.error('\n    option `--bundle` is required to build the bundle.\n')
+  console.error('\n    Incorrect command line options. Run `micromono bundle -h` for help.\n')
   process.exit(1)
 }
 
