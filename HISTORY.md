@@ -1,3 +1,14 @@
+0.1.34 (2015/11/25)
+===================
+- [Breaking] Rename sub command `micromono asset` to `micromono bundle`.
+- [Breaking] `Service#use` now accepts http method prefix same as in `route`. e.g. `post::/user/update`.
+- [Breaking] Rename `-a` to `-b` for `--bundle-asset`.
+- Make main export stateless and export `MicroMonoServer` to support multipe micromono instances in one process.
+
+0.1.33 (2015/11/18)
+===================
+- Make the layout middleware more friendly for isomorphic rendering.
+
 0.1.32 (2015/11/13)
 ===================
 - Expose more asset info in service announcement.

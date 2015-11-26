@@ -24,7 +24,7 @@ var Home = module.exports = Service.extend({
   use: {
     // tell micromono to use `layout` middleware at the server side
     // for request urls in the array.
-    'layout': ['/private$', '^/public$', '^/$', '/:username/:project']
+    'layout': ['get::/private$', '^/public$', '^/$', '/:username/:project']
   },
 
   route: {
