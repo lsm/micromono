@@ -1,6 +1,6 @@
 0.1.35 (2015/11/30)
 ===================
-- Bug fix for route handler can't get `next`
+- Bug fix for route handler can't get `next`.
 - Escape unsafe characters when render template with layout middleware `web/middleware/express-layout.js`.
 - Accept using middleware name in route definition.
 ```javascript
