@@ -1,3 +1,7 @@
+0.1.36 (2015/12/01)
+===================
+- Quick fix: routes should be optional.
+
 0.1.35 (2015/11/30)
 ===================
 - Bug fix for route handler can't get `next`.
