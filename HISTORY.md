@@ -1,3 +1,16 @@
+0.1.35 (2015/11/30)
+===================
+- Bug fix for route handler can't get `next`
+- Escape unsafe characters when render template with layout middleware `web/middleware/express-layout.js`.
+- Accept using middleware name in route definition.
+```javascript
+route: {
+'/hello': ['layout', handlerFn]
+}
+```
+- Fix incorrect parameter for express `router.param`.
+
+
 0.1.34 (2015/11/25)
 ===================
 - [Breaking] Rename sub command `micromono asset` to `micromono bundle`.
@@ -5,18 +18,22 @@
 - [Breaking] Rename `-a` to `-b` for `--bundle-asset`.
 - Make main export stateless and export `MicroMonoServer` to support multipe micromono instances in one process.
 
+
 0.1.33 (2015/11/18)
 ===================
 - Make the layout middleware more friendly for isomorphic rendering.
+
 
 0.1.32 (2015/11/13)
 ===================
 - Expose more asset info in service announcement.
 - Fix bugs for bundling asset.
 
+
 0.1.31 (2015/11/09)
 ===================
 - Support using `^` to override `baseUrl`.
+
 
 0.1.30 (2015/10/30)
 ===================
