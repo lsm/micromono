@@ -1,3 +1,7 @@
+0.1.37 (2015/12/02)
+===================
+- Expose page info to route.
+
 0.1.36 (2015/12/01)
 ===================
 - Quick fix: routes should be optional.
