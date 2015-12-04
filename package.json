@@ -13,9 +13,9 @@
   "scripts": {
     "test": "npm test",
     "release": "npm run release-patch",
-    "release-patch": "git checkout master && npm version patch && git push origin master --tags && npm publish",
-    "release-minor": "git checkout master && npm version minor && git push origin master --tags && npm publish",
-    "release-major": "git checkout master && npm version major && git push origin master --tags && npm publish"
+    "release-patch": "git checkout master && mversion patch -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish",
+    "release-minor": "git checkout master && mversion patch -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish",
+    "release-major": "git checkout master && mversion patch -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish"
   },
   "repository": {
     "type": "git",
