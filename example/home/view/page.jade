@@ -2,3 +2,10 @@ h2  #{title}
 h3  Hello #{name}
 h4 User ID: #{id}
 h4 User password: #{password}
+
+This page rendered by #{method} request.
+
+form(action="/home/private-form" method="POST")
+  label(for="key") Key
+  input(name="key")
+  input(type="submit" name="Submit")

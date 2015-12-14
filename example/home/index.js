@@ -36,7 +36,21 @@ var Home = module.exports = Service.extend({
           title: 'Home Private Page',
           name: user.username + ', you can not see this page unless you have logged in successfully.',
           id: user.id,
-          password: user.password
+          password: user.password,
+          method: 'GET'
+        })
+      })
+    }],
+
+    'post::/private-form': [account.middleware.auth(), function privatePage(req, res) {
+      // var user = req.user
+      account.api.getUserById(req.user.id, function(user) {
+        res.render('page', {
+          title: 'Home Private Page',
+          name: user.username + ', you can not see this page unless you have logged in successfully.',
+          id: user.id,
+          password: user.password,
+          method: 'POST'
         })
       })
     }],
