@@ -14,8 +14,8 @@
     "test": "npm test",
     "release": "npm run release-patch",
     "release-patch": "git checkout master && mversion patch -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish",
-    "release-minor": "git checkout master && mversion patch -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish",
-    "release-major": "git checkout master && mversion patch -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish"
+    "release-minor": "git checkout master && mversion minor -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish",
+    "release-major": "git checkout master && mversion major -m \"%s\" -t \"%s\" && git push origin master --tags && npm publish"
   },
   "repository": {
     "type": "git",
