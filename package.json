@@ -44,20 +44,24 @@
   "homepage": "https://github.com/lsm/micromono",
   "dependencies": {
     "ampersand-class-extend": "1.0.2",
-    "async": "1.5.0",
+    "async": "1.5.1",
     "axon": "2.0.2",
+    "callsite": "1.0.0",
     "cmdenv": "0.3.0",
     "debug": "2.2.0",
     "eventemitter3": "1.1.1",
     "express": "4.13.3",
     "http-proxy": "1.12.0",
+    "ip": "1.1.0",
     "jdad": "0.1.1",
-    "jspm": "0.16.15",
+    "js-args-names": "0.0.2",
+    "jspm": "0.16.19",
     "lodash.assign": "3.2.0",
     "lodash.difference": "3.2.2",
     "lodash.isarray": "3.0.4",
     "lodash.merge": "3.3.2",
     "lodash.toarray": "3.0.2",
+    "superpipe": "0.8.0",
     "weighted-round-robin": "2.0.2"
   }
 }
