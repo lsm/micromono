@@ -43,7 +43,6 @@
   },
   "homepage": "https://github.com/lsm/micromono",
   "dependencies": {
-    "ampersand-class-extend": "1.0.2",
     "async": "1.5.1",
     "axon": "2.0.2",
     "callsite": "1.0.0",
