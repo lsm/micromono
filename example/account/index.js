@@ -53,7 +53,6 @@ connectAuth.use(passport.session())
  * Account service
  */
 var Account = module.exports = {
-  middlewareBaseUrl: '/_middleware/account',
   middleware: {
     auth: function() {
       return function(req, res, next) {
