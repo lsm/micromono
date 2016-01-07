@@ -6,30 +6,25 @@ var path = require('path')
 var bodyParser = require('body-parser')
 
 // setup micromono
-var MicroMono = require('micromono')
-var Service = MicroMono.Service
-var micromono = new MicroMono()
+var micromono = require('micromono')
 
-// require account service
-var Account = micromono.require('account')
-var account = new Account()
+// require instance of account service
+var account = micromono.require('account')
 
 /**
  * Example service which render pages and use other service as dependency.
  */
-var Home = module.exports = Service.extend({
-  packagePath: __dirname,
-  baseUrl: '/home',
+var Home = module.exports = {
 
   use: {
     // tell micromono to use `layout` middleware at the server side
     // for request urls in the array.
-    'layout': ['get::/private$', '^/public$', '^/$', '/:username/:project']
+    'layout': ['get::/home/private$', '/public$', '/$', '/project/:project/:id']
   },
 
   route: {
     // a password protected page
-    'get::/private': [account.middleware.auth(), function privatePage(req, res) {
+    'get::/home/private': [account.middleware.auth(), function privatePage(req, res) {
       // var user = req.user
       account.api.getUserById(req.user.id, function(user) {
         res.render('page', {
@@ -42,7 +37,7 @@ var Home = module.exports = Service.extend({
       })
     }],
 
-    'post::/private-form': [account.middleware.auth(), function privatePage(req, res) {
+    'post::/home/private-form': [account.middleware.auth(), function privatePage(req, res) {
       // var user = req.user
       account.api.getUserById(req.user.id, function(user) {
         res.render('page', {
@@ -55,14 +50,14 @@ var Home = module.exports = Service.extend({
       })
     }],
 
-    'get::^/public': function publicPage(req, res) {
+    'get::/public': function publicPage(req, res) {
       res.render('page', {
         title: 'Home Public Page',
         name: 'anonymouse'
       })
     },
 
-    'get::^/': function index(req, res) {
+    'get::/': function index(req, res) {
       res.render('index')
     },
 
@@ -94,9 +89,7 @@ var Home = module.exports = Service.extend({
    *
    * @return {Promise}
    */
-  init: function() {
-    var app = this.app
-
+  init: function(app, next) {
     app.use(bodyParser.urlencoded({
       extended: false
     }))
@@ -104,9 +97,9 @@ var Home = module.exports = Service.extend({
     app.set('views', path.join(__dirname, './view'))
     app.set('view engine', 'jade')
 
-    return Promise.resolve()
+    next()
   }
-})
+}
 
 // Start the service if this is the main file
 if (require.main === module) {

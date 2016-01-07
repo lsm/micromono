@@ -9,9 +9,7 @@ var session = require('express-session')
 var connect = require('connect')
 
 // setup micromono
-var MicroMono = require('micromono')
-var Service = MicroMono.Service
-var micromono = new MicroMono()
+var micromono = require('micromono')
 
 // get passport
 var passport = require('./passport')
@@ -54,9 +52,8 @@ connectAuth.use(passport.session())
 /**
  * Account service
  */
-var Account = module.exports = Service.extend({
-  packagePath: __dirname,
-  baseUrl: '/account',
+var Account = module.exports = {
+  middlewareBaseUrl: '/_middleware/account',
   middleware: {
     auth: function() {
       return function(req, res, next) {
@@ -76,7 +73,7 @@ var Account = module.exports = Service.extend({
   use: {
     // tell micromono to use `layout` middleware at the server side
     // for request url matching `/account/:page`.
-    'layout': '/:page'
+    'layout': '/account/:page'
   },
 
   /**
@@ -87,7 +84,7 @@ var Account = module.exports = Service.extend({
     /**
      * Example protected page
      */
-    'get::/protected': function protectedPage(req, res) {
+    'get::/account/protected': function protectedPage(req, res) {
       if (isAuthenticated(req, res)) {
         res.render('hello', {
           name: req.user.username
@@ -95,27 +92,24 @@ var Account = module.exports = Service.extend({
       }
     },
 
-    'post::^/logout': function logout(req, res) {
+    'post::/logout': function logout(req, res) {
       req.logout()
       res.redirect('/account/login')
     },
 
-    'get::/login': function login(req, res) {
+    'get::/account/login': function login(req, res) {
       res.render('login')
     },
 
     /**
      * Login form handler
      */
-    'post::/login': [passportAuth, function loginOkay(req, res) {
+    'post::/account/login': [passportAuth, function loginOkay(req, res) {
       res.redirect('/account/protected')
     }]
   },
 
-  init: function() {
-    // get express instance
-    var app = this.app
-
+  init: function(app) {
     // attach the connect auth middleware to our local express app
     app.use(connectAuth)
 
@@ -123,7 +117,7 @@ var Account = module.exports = Service.extend({
     app.set('views', path.join(__dirname, './view'))
     app.set('view engine', 'jade')
 
-    return Promise.resolve()
+    return true
   },
 
   api: {
@@ -139,7 +133,7 @@ var Account = module.exports = Service.extend({
       }
     }
   }
-})
+}
 
 // Start the service if this is the main file
 if (require.main === module) {
