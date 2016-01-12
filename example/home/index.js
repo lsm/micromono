@@ -14,7 +14,7 @@ var account = micromono.require('account')
 /**
  * Example service which render pages and use other service as dependency.
  */
-var Home = module.exports = {
+var Home = module.exports = micromono.createService({
 
   use: {
     // tell micromono to use `layout` middleware at the server side
@@ -99,7 +99,7 @@ var Home = module.exports = {
 
     next()
   }
-}
+})
 
 // Start the service if this is the main file
 if (require.main === module) {
