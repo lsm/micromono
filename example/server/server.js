@@ -10,8 +10,8 @@ app.set('view engine', 'jade')
 // Get a micromono instance.
 var micromono = require('micromono')
 
-// Boot the service(s) with express server
-// do stuff in the promise callback.
+// Boot the service(s) with an express app
+// do stuff in the callback.
 micromono.startBalancer(app, function(balancerAsset) {
   console.log('server booted')
 
@@ -27,6 +27,4 @@ micromono.startBalancer(app, function(balancerAsset) {
   if (assetInfo.main) {
     app.locals.mainEntryJs = assetInfo.main
   }
-
-  app.listen(3000)
 })
