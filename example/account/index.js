@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser')
 var session = require('express-session')
 var connect = require('connect')
 
-// setup micromono
+// get micromono instance
 var micromono = require('micromono')
 
 // get passport
