@@ -1,6 +1,6 @@
 {
   "name": "micromono",
-  "version": "0.1.46",
+  "version": "0.1.99",
   "description": "Monolithic micro-services framework",
   "main": "lib/index.js",
   "bin": {
@@ -60,7 +60,7 @@
     "lodash.isarray": "3.0.4",
     "lodash.merge": "3.3.2",
     "lodash.toarray": "3.0.2",
-    "superpipe": "0.8.0",
+    "superpipe": "0.9.0",
     "weighted-round-robin": "2.0.2"
   }
 }
