@@ -12,7 +12,6 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-
   buildCSS: true,
   separateCSS: true,
 
@@ -22,6 +21,7 @@ System.config({
     "clean-css": "npm:clean-css@3.4.7",
     "core-js": "npm:core-js@1.2.3",
     "css": "github:systemjs/plugin-css@0.1.19",
+    "lodash.assign": "npm:lodash.assign@4.0.0",
     "socket.io-client": "github:socketio/socket.io-client@1.3.7",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -116,6 +116,13 @@ System.config({
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:lodash.assign@4.0.0": {
+      "lodash.keys": "npm:lodash.keys@4.0.0",
+      "lodash.rest": "npm:lodash.rest@4.0.0"
+    },
+    "npm:lodash.rest@4.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
