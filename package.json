@@ -1,6 +1,6 @@
 {
   "name": "micromono",
-  "version": "0.1.106",
+  "version": "0.1.107",
   "description": "Monolithic micro-services framework",
   "main": "lib/index.js",
   "bin": {
