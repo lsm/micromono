@@ -15,7 +15,7 @@ var micromono = require('micromono')
 micromono.startBalancer(app, function(balancerAsset) {
   console.log('server booted')
 
-  var assetInfo = balancerAsset.jspmInfo
+  var assetInfo = balancerAsset.assetInfo
 
   if (assetInfo.urls.bundleJs) {
     app.locals.mainBundleJs = assetInfo.urls.bundleJs
