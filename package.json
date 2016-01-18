@@ -60,6 +60,7 @@
     "lodash.isarray": "3.0.4",
     "lodash.merge": "3.3.2",
     "lodash.toarray": "3.0.2",
+    "lodash.union": "4.0.1",
     "superpipe": "0.9.0",
     "weighted-round-robin": "2.0.2"
   }
