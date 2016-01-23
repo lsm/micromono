@@ -1,3 +1,7 @@
+0.1.110 (2015/01/23)
+===================
+- Bug fix for wrong proxy url.
+
 0.1.109 (2015/01/23)
 ===================
 - Close proxy after provider is removed.
