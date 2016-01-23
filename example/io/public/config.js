@@ -23,7 +23,7 @@ System.config({
     "babel": "npm:babel-core@5.8.29",
     "babel-runtime": "npm:babel-runtime@5.8.29",
     "core-js": "npm:core-js@1.2.3",
-    "socket.io-client": "github:socketio/socket.io-client@1.3.7",
+    "socket.io-client": "github:socketio/socket.io-client@1.4.4",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

@@ -22,7 +22,7 @@ System.config({
     "core-js": "npm:core-js@1.2.3",
     "css": "github:systemjs/plugin-css@0.1.19",
     "lodash.assign": "npm:lodash.assign@4.0.0",
-    "socket.io-client": "github:socketio/socket.io-client@1.3.7",
+    "socket.io-client": "github:socketio/socket.io-client@1.4.4",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

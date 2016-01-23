@@ -1,4 +1,7 @@
-var socket = require('socket.io-client')({path: '/io/example-socket'});
+var socket = require('socket.io-client')({
+  path: '/io/example-socket',
+  'force new connection': true
+});
 socket.emit('message', 'first message');
 
 setInterval(function() {
