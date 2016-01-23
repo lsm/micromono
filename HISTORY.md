@@ -1,3 +1,8 @@
+0.1.109 (2015/01/23)
+===================
+- Close proxy after provider is removed.
+- #15 Bug fix for proxying websocket requests.
+
 0.1.37 (2015/12/02)
 ===================
 - Expose page info to route.
