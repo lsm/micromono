@@ -5,6 +5,7 @@
 # MicroMono
 [![License MIT][license]](http://opensource.org/licenses/MIT)
 [![NPM version][npm-image]][npm-url]
+[![Dependencies][dep-image]][dep-url]
 [![Downloads][downloads-image]][npm-url]
 [![Code Climate](https://codeclimate.com/github/lsm/micromono/badges/gpa.svg)](https://codeclimate.com/github/lsm/micromono)
 [![Join the chat at https://gitter.im/lsm/micromono](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lsm/micromono?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -382,7 +383,8 @@ On hacker news: https://news.ycombinator.com/item?id=10157418
 
 MIT
 
-
+[dep-url]: https://david-dm.org/lsm/micromono
+[dep-image]: https://david-dm.org/lsm/micromono.svg
 [npm-url]: https://npmjs.org/package/micromono
 [npm-image]: http://img.shields.io/npm/v/micromono.svg
 [license]: https://img.shields.io/npm/l/micromono.svg
