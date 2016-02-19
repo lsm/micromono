@@ -1,8 +1,12 @@
-0.1.110 (2015/01/23)
+0.1.111 (2016/02/19)
+===================
+- Use socketmq as default rpc adapter.
+
+0.1.110 (2016/01/23)
 ===================
 - Bug fix for wrong proxy url.
 
-0.1.109 (2015/01/23)
+0.1.109 (2016/01/23)
 ===================
 - Close proxy after provider is removed.
 - #15 Bug fix for proxying websocket requests.
