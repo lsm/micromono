@@ -9,3 +9,6 @@ mono:
 
 mono-io:
 	DEBUG=micromono* node server/server.js --service-dir ./ --service io
+
+cluster:
+	docker-compose run --publish 3000:3000 --rm balancer

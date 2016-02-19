@@ -1,0 +1,34 @@
+micromono:
+  image: node:4
+  command: node /opt/index.js
+  volumes:
+    - ../:/opt/node_modules/micromono
+    - ~/workspace/socketmq:/opt/node_modules/micromono/node_modules/socketmq
+  environment:
+    - DEBUG=micromono*
+    - NODE_ENV=development
+
+balancer:
+  extends: micromono
+  command: node /opt/server.js --service account,home,io
+  volumes:
+    - ./balancer:/opt
+  links:
+    - account
+    - home
+    - io
+
+account:
+  extends: micromono
+  volumes:
+    - ./account:/opt
+
+home:
+  extends: micromono
+  volumes:
+    - ./home:/opt
+
+io:
+  extends: micromono
+  volumes:
+    - ./io:/opt
