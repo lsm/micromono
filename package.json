@@ -53,7 +53,7 @@
     "ip": "1.1.0",
     "jdad": "0.2.0",
     "js-args-names": "0.0.2",
-    "jspm": "0.16.29",
+    "jspm": "0.16.30",
     "lodash.assign": "4.0.3",
     "lodash.difference": "4.1.0",
     "lodash.isarray": "4.0.0",
@@ -61,7 +61,7 @@
     "lodash.toarray": "4.2.0",
     "lodash.union": "4.2.0",
     "socketmq": "0.2.0",
-    "superpipe": "0.9.0",
+    "superpipe": "0.10.0",
     "weighted-round-robin": "2.0.2"
   }
 }
