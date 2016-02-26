@@ -15,6 +15,15 @@
         "semi": [
             2,
             "never"
+        ],
+        "yoda": [
+            2,
+            "always"
+        ],
+        "curly": [
+            2,
+            "multi",
+            "consistent"
         ]
     },
     "env": {
