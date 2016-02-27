@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
 var path = require('path')
-var Asset = require('../lib/web/asset')
 var program = require('cmdenv')('micromono')
+var SuperPipe = require('superpipe')
+var AssetPipe = require('../lib/web/asset')
+var bundleAsset = require('../lib/web/asset/pipeline').bundleAsset
+var LocalServicePipe = require('../lib/service/local')
+
 
 program
   .usage('[options] path')
@@ -23,8 +27,16 @@ var servicePath = program.args[0]
 if (servicePath) {
   servicePath = path.resolve(servicePath)
 
-  var asset = new Asset(servicePath)
-  asset.parseJSPM()
+  var superpipe = new SuperPipe()
+  superpipe
+    .setDep(AssetPipe, '*^')
+    .setDep(LocalServicePipe, '*^')
+    .setDep('packagePath', servicePath)
+    .setDep('service', {})
+    .setDep('errorHandler', function(err, errPipeName, errPipeBody) {
+      console.error('[%s] `bundle` error', errPipeName, errPipeBody, err && err.stack || err)
+      process.exit(-1)
+    })
 
   var options = {
     bundleDeps: program.bundleDeps || false,
@@ -38,12 +50,21 @@ if (servicePath) {
     separateCss: program.separateCss || true
   }
 
-  if (program.outFile) {
+  if (program.outFile)
     options.outFile = program.outFile
-  }
 
-  asset.bundle(options)
+  console.log('bundleOptions:', options)
 
+  superpipe.setDep('bundleOptions', options)
+
+  bundleAsset.slice()
+    .connect(superpipe)
+    .pipe(function(bundleCmd) {
+      console.log('jspm ' + bundleCmd)
+      console.log('Bundled successfully')
+      process.exit(0)
+    }, ['bundleCmd'])
+    .error('errorHandler', [null, 'errPipeName', 'errPipeBody'])()
 } else {
   console.error('\n    Incorrect command line options. Run `micromono bundle -h` for help.\n')
   process.exit(1)
