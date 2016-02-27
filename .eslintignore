@@ -1,4 +1,5 @@
 node_modules/**
 coverage
-**/public/config.js
-
+example/io/public/config.js
+example/home/public/config.js
+example/balancer/public/config.js

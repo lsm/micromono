@@ -1,3 +1,5 @@
+/* jshint ignore:start */
+
 System.config({
   baseURL: "/public",
   defaultJSExtensions: true,
