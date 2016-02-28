@@ -119,17 +119,21 @@ var Account = module.exports = {
     return true
   },
 
+  getUserById: function(id, callback) {
+    if (id === 1) {
+      callback({
+        id: 1,
+        username: 'micromono',
+        password: '123456'
+      })
+    } else {
+      callback(null)
+    }
+  },
+
   api: {
     getUserById: function(id, callback) {
-      if (id === 1) {
-        callback({
-          id: 1,
-          username: 'micromono',
-          password: '123456'
-        })
-      } else {
-        callback(null)
-      }
+      this.getUserById(id, callback)
     }
   }
 }
