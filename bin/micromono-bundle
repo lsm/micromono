@@ -9,18 +9,19 @@ var LocalServicePipe = require('../lib/service/local')
 
 
 program
-  .usage('[options] path')
-  .description('Bundle asset files for given service path')
+  .usage('[OPTIONS] path')
+  .description('Bundle asset files for a service')
   .option('-d --bundle-deps', 'Include dependencies when bundling. Default false.')
   .option('-o --out-file [path]', 'Set the path of the output file.')
   .option('--source-maps', 'Enable source maps. Default false.')
   .option('-m --source-map-contents', 'Enable source maps. Default false.')
-  .option('--low-res-source-maps', 'Generate low resolution source maps. Default true.')
-  .option('-i --inject', 'Inject bundle info into `config.js`. Default true.')
-  .option('-z --minify', 'Minify the output files. Default true.')
-  .option('-g --mangle', 'Default true.')
-  .option('-c --bundle-css', 'Bundle CSS files. Default true.')
-  .option('-s --separate-css', 'Bundle CSS into a separate file. Default true.')
+  .option('--low-res-source-maps', 'Generate low resolution source maps. Default false.')
+  .option('-i --inject', 'Inject bundle info into `config.js`. Default false.')
+  .option('-z --minify', 'Minify the output files. Default false.')
+  .option('-g --mangle', 'Default false.')
+  .option('-c --bundle-css', 'Bundle CSS files. Default false.')
+  .option('-s --separate-css', 'Bundle CSS into a separate file. Default false.')
+  .option('--production', 'Enable all options suitable for production.')
   .parse(process.argv)
 
 var servicePath = program.args[0]
@@ -42,12 +43,26 @@ if (servicePath) {
     bundleDeps: program.bundleDeps || false,
     sourceMaps: program.sourceMaps || false,
     sourceMapContents: program.sourceMapContents || false,
-    lowResSourceMaps: program.lowResSourceMaps || true,
-    inject: program.inject || true,
-    minify: program.minify || true,
-    mangle: program.mangle || true,
-    buildCss: program.buildCss || true,
-    separateCss: program.separateCss || true
+    lowResSourceMaps: program.lowResSourceMaps || false,
+    inject: program.inject || false,
+    minify: program.minify || false,
+    mangle: program.mangle || false,
+    buildCss: program.buildCss || false,
+    separateCss: program.separateCss || false
+  }
+
+  if (program.production) {
+    options = {
+      bundleDeps: program.bundleDeps || false,
+      sourceMaps: program.sourceMaps || false,
+      sourceMapContents: program.sourceMapContents || false,
+      lowResSourceMaps: program.lowResSourceMaps || true,
+      inject: program.inject || true,
+      minify: program.minify || true,
+      mangle: program.mangle || true,
+      buildCss: program.buildCss || true,
+      separateCss: program.separateCss || true
+    }
   }
 
   if (program.outFile)
@@ -66,7 +81,6 @@ if (servicePath) {
     }, ['bundleCmd'])
     .error('errorHandler', [null, 'errPipeName', 'errPipeBody'])()
 } else {
-  console.error('\n    Incorrect command line options. Run `micromono bundle -h` for help.\n')
-  process.exit(1)
+  program.outputHelp()
 }
 

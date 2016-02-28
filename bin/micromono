@@ -5,8 +5,8 @@ var program = require('cmdenv')('micromono')
 
 program
   .version('0.2.0')
-  .usage('[options] command [arg...]')
-  .command('bundle [options] path', 'Bundle asset files for given service path')
-  .command('balancer [options] path', 'Start a balancer from path')
-  .command('service [options] path', 'Start a service from path')
+  .usage('[OPTIONS] COMMAND [ARG...]')
+  .command('bundle [ARG...] [path]', 'Bundle asset files for given service path')
+  // .command('balancer [options] path', 'Start a balancer from path')
+  // .command('service [options] path', 'Start a service from path')
   .parse(process.argv)
