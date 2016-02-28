@@ -9,7 +9,8 @@
   },
   "micromono": {
     "name": "io",
-    "publicURL": "/public/io"
+    "publicURL": "/public/io",
+    "bundleJs": "/public/io/bundle-io.js"
   },
   "jspm": {
     "main": "io/main.js",

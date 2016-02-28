@@ -1,5 +1,3 @@
-/* jshint ignore:start */
-
 System.config({
   defaultJSExtensions: true,
   transpiler: "babel",

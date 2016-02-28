@@ -4,8 +4,8 @@ div
   h3 Message from server (emits every 2 seconds):
   div#message
 
-  if asset && asset.urls && asset.urls.bundleJs
-    script(type='text/javascript', src="#{asset.urls.bundleJs}")
+  if asset && asset.bundleJs
+    script(type='text/javascript', src="#{asset.bundleJs}")
 
   if asset && asset.main
     script(type='text/javascript').
