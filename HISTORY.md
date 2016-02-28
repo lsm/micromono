@@ -1,3 +1,11 @@
+0.2.0 (2016/02/28)
+==================
+- Allow using `this` to reference service instance in api handlers.
+- Simplify `Scheduler` remove external dependencies.
+- One proxy instance per proxy handler.
+- Rewrite asset implementation using pipelines.
+- Cleanup bundle command and its options.
+
 0.1.111 (2016/02/19)
 ===================
 - Use socketmq as default rpc adapter.
