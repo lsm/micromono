@@ -3,7 +3,7 @@ micromono:
   command: node /opt/index.js
   volumes:
     - ../:/opt/node_modules/micromono
-    - ~/workspace/socketmq:/opt/node_modules/micromono/node_modules/socketmq
+    - ./balancer/node_modules/jade:/opt/node_modules/micromono/node_modules/jade
   environment:
     - DEBUG=micromono*
     - NODE_ENV=development
