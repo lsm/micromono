@@ -18,10 +18,10 @@ micromono.startBalancer(app, function(balancerAsset) {
   var assetInfo = balancerAsset.assetInfo
 
   if (assetInfo.bundleJs) {
-    app.locals.mainBundleJs = assetInfo.urls.bundleJs
+    app.locals.mainBundleJs = assetInfo.bundleJs
   }
   if (assetInfo.bundleCss) {
-    app.locals.mainBundleCss = assetInfo.urls.bundleCss
+    app.locals.mainBundleCss = assetInfo.bundleCss
   }
 
   if (assetInfo.main) {
