@@ -44,7 +44,7 @@
   "homepage": "https://github.com/lsm/micromono",
   "dependencies": {
     "callsite": "1.0.0",
-    "cmdenv": "0.3.0",
+    "cmdenv": "0.4.1",
     "debug": "2.2.0",
     "express": "4.13.4",
     "http-proxy": "1.13.2",
