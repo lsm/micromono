@@ -32,3 +32,47 @@ io:
   extends: micromono
   volumes:
     - ./io:/opt
+
+# NATS as service discovery backend
+
+balancer-nats:
+  extends: micromono
+  command: node /opt/server.js --service account,home,io
+  volumes:
+    - ./balancer:/opt
+  links:
+    - account-nats
+    - home-nats
+    - io-nats
+    - nats:nats.dev
+  environment:
+    - MICROMONO_DISCOVERY_BACKEND=nats
+    - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
+
+nats:
+  image: nats:0.7.2
+
+account-nats:
+  extends: account
+  links:
+    - nats:nats.dev
+  environment:
+    - MICROMONO_DISCOVERY_BACKEND=nats
+    - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
+
+home-nats:
+  extends: home
+  links:
+    - nats:nats.dev
+  environment:
+    - MICROMONO_DISCOVERY_BACKEND=nats
+    - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
+
+io-nats:
+  extends: io
+  links:
+    - nats:nats.dev
+  environment:
+    - MICROMONO_DISCOVERY_BACKEND=nats
+    - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
+

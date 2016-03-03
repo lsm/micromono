@@ -12,3 +12,6 @@ mono-io:
 
 cluster:
 	docker-compose run --publish 3000:3000 --rm balancer
+
+nats-cluster:
+	docker-compose run --publish 3000:3000 --rm balancer-nats
