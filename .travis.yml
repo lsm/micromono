@@ -11,4 +11,3 @@ cache:
   - node_modules
 script:
   - make -C ./example e2e-ci
-# after_script:
