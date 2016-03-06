@@ -24,3 +24,4 @@ script:
   - make install
   - make e2e-ci
   - make report
+  - make coveralls
