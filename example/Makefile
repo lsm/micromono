@@ -63,5 +63,5 @@ coveralls:
 	docker-compose run --rm micromono make docker-coveralls
 
 docker-coveralls:
-  cat /opt/coverage/lcov.info | coveralls
+	cat /opt/coverage/lcov.info | coveralls
 
