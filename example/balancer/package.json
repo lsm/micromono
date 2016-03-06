@@ -1,6 +1,6 @@
 {
-  "name": "server",
-  "version": "0.1.0",
+  "name": "balancer",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,8 @@
   "dependencies": {
     "express": "4.13.4",
     "jade": "1.11.0",
-    "jspm": "0.16.24",
-    "micromono": "0.1.x"
+    "jspm": "0.16.30",
+    "micromono": "0.2.3"
   },
   "micromono": {
     "publicURL": "/public"
@@ -24,13 +24,13 @@
       "baseURL": "public"
     },
     "dependencies": {
-      "lodash.assign": "npm:lodash.assign@^4.0.0",
-      "socket.io-client": "github:socketio/socket.io-client@1.4.4"
+      "lodash.assign": "npm:lodash.assign@4.0.0",
+      "socket.io-client": "npm:socket.io-client@1.4.5"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@5.8.29",
-      "babel-runtime": "npm:babel-runtime@5.8.29",
-      "core-js": "npm:core-js@1.2.3",
+      "babel": "npm:babel-core@5.8.34",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@1.2.6",
       "css": "github:systemjs/plugin-css@0.1.12"
     }
   }

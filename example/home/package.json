@@ -1,21 +1,20 @@
 {
   "name": "home",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "browser-sync start --files 'client/**/*.html,client/**/*.js,client/**/*.css' --server 'public'"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "MicroMono",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.14.2",
-    "jade": "^1.11.0",
-    "micromono": "0.1.x"
+    "body-parser": "1.15.0",
+    "jade": "1.11.0",
+    "micromono": "0.2.3"
   },
   "devDependencies": {
-    "jspm": "0.16.23"
+    "jspm": "0.16.30"
   },
   "micromono": {
     "name": "home",
@@ -27,12 +26,12 @@
       "baseURL": "public"
     },
     "dependencies": {
-      "lodash.assign": "npm:lodash.assign@^4.0.0"
+      "lodash.assign": "npm:lodash.assign@4.0.0"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.2.6"
+      "babel": "npm:babel-core@5.8.34",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@1.2.6"
     }
   }
 }

@@ -1,4 +1,4 @@
-var micromono = require('micromono')
+var micromono = require('/opt/micromono')
 
 
 var IO = module.exports = {
@@ -13,6 +13,12 @@ var IO = module.exports = {
   route: {
     '/io': function(req, res) {
       res.render('index')
+    },
+    '/io/exit': function(req, res) {
+      res.send('ok')
+      setTimeout(function() {
+        process.exit(0)
+      }, 1000)
     }
   },
 

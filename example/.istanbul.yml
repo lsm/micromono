@@ -1,0 +1,3 @@
+instrumentation:
+  root: /opt/micromono
+  excludes: ['example/**', 'node_modules/**']

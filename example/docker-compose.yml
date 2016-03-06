@@ -1,37 +1,79 @@
 micromono:
-  image: node:4
+  build: ./
   command: node /opt/index.js
   volumes:
-    - ../:/opt/node_modules/micromono
-    - ./balancer/node_modules/jade:/opt/node_modules/micromono/node_modules/jade
+    - ./:/opt
+    - ../:/opt/micromono
+    - ./balancer/node_modules/jade:/opt/micromono/node_modules/jade
   environment:
     - DEBUG=micromono*
     - NODE_ENV=development
+    - NPM_CONFIG_LOGLEVEL=warn
 
 balancer:
   extends: micromono
-  command: node /opt/server.js --service account,home,io
-  volumes:
-    - ./balancer:/opt
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/balancer/coverage /opt/balancer/server.js
+  ports:
+    - "3000:3000"
   links:
     - account
     - home
     - io
+  environment:
+    - MICROMONO_SERVICE=account,home,io
 
 account:
   extends: micromono
-  volumes:
-    - ./account:/opt
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/account/coverage /opt/account/index.js
 
 home:
   extends: micromono
-  volumes:
-    - ./home:/opt
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/home/coverage /opt/home/index.js
 
 io:
   extends: micromono
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/io/coverage /opt/io/index.js
+
+#
+# nightwatch + selenium
+#
+
+hub:
+  image: selenium/hub:2.52.0
+chrome:
+  image: selenium/node-chrome:2.52.0
+  links:
+    - hub
+    - balancer
+chromedebug:
+  image: selenium/node-chrome-debug:2.52.0
+  links:
+    - hub
+    - balancer
+  ports:
+    - "5900:5900"
+firefox:
+  image: selenium/node-firefox:2.52.0
+  links:
+    - hub
+    - balancer
+firefoxdebug:
+  image: selenium/node-firefox-debug:2.52.0
+  links:
+    - hub
+    - balancer
+  ports:
+    - 5901:5900
+nightwatch:
+  image: blueimp/nightwatch:0.8
+  links:
+    - hub
   volumes:
-    - ./io:/opt
+    - ./test/e2e:/home/node
+  environment:
+    - APP_URL=http://balancer:3000
+    - IB_WWW_URL=https://www.dev.instbrew.com
+
 
 # NATS as service discovery backend
 

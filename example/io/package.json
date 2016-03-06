@@ -1,11 +1,11 @@
 {
   "name": "io",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "dependencies": {
     "jade": "1.11.0",
-    "micromono": "0.1.x",
-    "socket.io": "1.3.6",
-    "jspm": "0.16.14"
+    "micromono": "0.2.3",
+    "socket.io": "1.4.5",
+    "jspm": "0.16.30"
   },
   "micromono": {
     "name": "io",
@@ -18,12 +18,12 @@
       "baseURL": "public"
     },
     "dependencies": {
-      "socket.io-client": "github:socketio/socket.io-client@1.4.4"
+      "socket.io-client": "npm:socket.io-client@1.4.5"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@5.8.29",
-      "babel-runtime": "npm:babel-runtime@5.8.29",
-      "core-js": "npm:core-js@1.2.3"
+      "babel": "npm:babel-core@5.8.34",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@1.2.6"
     }
   }
 }

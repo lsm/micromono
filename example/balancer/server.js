@@ -7,8 +7,15 @@ var app = require('express')()
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
 
+app.get('/balancer/exit', function(req, res) {
+  res.send('ok')
+  setTimeout(function() {
+    process.exit(0)
+  }, 1000)
+})
+
 // Get a micromono instance.
-var micromono = require('micromono')
+var micromono = require('/opt/micromono')
 
 // Boot the service(s) with an express app
 // do stuff in the callback.

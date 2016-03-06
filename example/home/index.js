@@ -6,7 +6,7 @@ var path = require('path')
 var bodyParser = require('body-parser')
 
 // setup micromono
-var micromono = require('micromono')
+var micromono = require('/opt/micromono')
 
 // require instance of account service
 var account = micromono.require('account')
@@ -80,7 +80,15 @@ var Home = module.exports = micromono.createService({
         context.yield = 'this is data rendered for page'
         res.json(context)
       }
+    },
+
+    '/home/exit': function(req, res) {
+      res.send('ok')
+      setTimeout(function() {
+        process.exit(0)
+      }, 1000)
     }
+
   },
 
   /**

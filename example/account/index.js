@@ -9,7 +9,7 @@ var session = require('express-session')
 var connect = require('connect')
 
 // get micromono instance
-var micromono = require('micromono')
+var micromono = require('/opt/micromono')
 
 // get passport
 var passport = require('./passport')
@@ -105,7 +105,14 @@ var Account = module.exports = {
      */
     'post::/account/login': [passportAuth, function loginOkay(req, res) {
       res.redirect('/account/protected')
-    }]
+    }],
+
+    '/account/exit': function(req, res) {
+      res.send('ok')
+      setTimeout(function() {
+        process.exit(0)
+      }, 1000)
+    }
   },
 
   init: function(app) {

@@ -1,6 +1,5 @@
-/* jshint ignore:start */
-
 System.config({
+  baseURL: "/public",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -47,10 +46,10 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:lodash.assign@4.0.0": {
-      "lodash.keys": "npm:lodash.keys@4.0.0",
-      "lodash.rest": "npm:lodash.rest@4.0.0"
+      "lodash.keys": "npm:lodash.keys@4.0.5",
+      "lodash.rest": "npm:lodash.rest@4.0.1"
     },
-    "npm:lodash.rest@4.0.0": {
+    "npm:lodash.rest@4.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:path-browserify@0.0.0": {

@@ -1,0 +1,22 @@
+{
+  "src_folders" : ["."],
+  "test_settings" : {
+    "default" : {
+      "launch_url": "https://balancer:3000",
+      "selenium_host"  : "hub",
+      "desiredCapabilities": {
+        "browserName": "chrome"
+      },
+      "screenshots" : {
+        "enabled" : true,
+        "on_failure" : true,
+        "path" : "tests_output"
+      }
+    },
+    "firefox" : {
+      "desiredCapabilities": {
+        "browserName": "firefox"
+      }
+    }
+  }
+}
