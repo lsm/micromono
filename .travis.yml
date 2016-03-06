@@ -3,7 +3,6 @@ services:
   - docker
 
 language: c
-install: make
 fast_finish: true
 
 cache:
@@ -11,7 +10,7 @@ cache:
   - node_modules
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.6.0
+  DOCKER_COMPOSE_VERSION: 1.5.2
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
