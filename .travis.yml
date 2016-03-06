@@ -2,7 +2,12 @@ sudo: required
 services:
   - docker
 
-language: c
+language: node_js
+node_js:
+  - "4"
+
+install: npm i -g coveralls
+
 fast_finish: true
 
 cache:
