@@ -51,11 +51,10 @@ e2e:
 	open vnc://test:secret@`docker-machine ip default`:5900
 	docker-compose run --rm nightwatch --config ./nightwatch.json -e default
 
-e2e-ci: install
+e2e-ci:
 	docker-compose up -d chrome
 	sleep 60
 	docker-compose run --rm nightwatch --config ./nightwatch.json -e default
-	make report
 
 report:
 	docker-compose run --rm micromono istanbul report
