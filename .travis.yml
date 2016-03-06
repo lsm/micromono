@@ -20,4 +20,4 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - make -C ./example e2e-ci
+  - 'make -C ./example e2e-ci'
