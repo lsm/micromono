@@ -1,7 +1,7 @@
 FROM node:4
 
 
-RUN npm i -g istanbul jspm
+RUN npm i -g istanbul jspm coveralls
 
 WORKDIR /opt
 

@@ -8,8 +8,8 @@
         "browserName": "chrome"
       },
       "screenshots" : {
-        "enabled" : true,
-        "on_failure" : true,
+        "enabled" : false,
+        "on_failure" : false,
         "path" : "tests_output"
       }
     },

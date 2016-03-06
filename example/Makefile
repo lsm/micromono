@@ -58,3 +58,10 @@ e2e-ci:
 
 report:
 	docker-compose run --rm micromono istanbul report
+
+coveralls:
+	docker-compose run --rm micromono make docker-coveralls
+
+docker-coveralls:
+  cat /opt/coverage/lcov.info | coveralls
+
