@@ -19,7 +19,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - cd ./example && docker-compose build
-  - make -C ./example install
-  - make -C ./example e2e-ci
-  - make -C ./example report
+  - cd ./example
+  - docker-compose build
+  - make install
+  - make e2e-ci
+  - make report
