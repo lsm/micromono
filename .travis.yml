@@ -25,6 +25,7 @@ before_install:
 
 script:
   - cd ./example
+  - docker-compose pull
   - docker-compose build
   - make install
   - make e2e-ci
