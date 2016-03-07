@@ -6,6 +6,7 @@
 [![License MIT][license]](http://opensource.org/licenses/MIT)
 [![NPM version][npm-image]][npm-url]
 [![Build Status](https://travis-ci.org/lsm/micromono.svg?branch=master)](https://travis-ci.org/lsm/micromono)
+[![Coverage Status](https://coveralls.io/repos/github/lsm/micromono/badge.svg?branch=master)](https://coveralls.io/github/lsm/micromono?branch=master)
 [![Dependencies][dep-image]][dep-url]
 [![Downloads][downloads-image]][npm-url]
 [![Code Climate](https://codeclimate.com/github/lsm/micromono/badges/gpa.svg)](https://codeclimate.com/github/lsm/micromono)

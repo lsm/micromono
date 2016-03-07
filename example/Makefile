@@ -60,8 +60,8 @@ report:
 	docker-compose run --rm micromono istanbul report
 
 coveralls:
-	echo "repo_token: ${COVERALLS_TOKEN}" > ./.coveralls.yml
-	docker-compose run --rm micromono make docker-coveralls
+	docker-compose run --rm -e COVERALLS_TOKEN=${COVERALLS_TOKEN} micromono make docker-coveralls
 
 docker-coveralls:
+	echo "repo_token: ${COVERALLS_TOKEN}" > ./.coveralls.yml
 	cat ./coverage/lcov.info | coveralls
