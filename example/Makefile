@@ -32,11 +32,11 @@ mono-io:
 	DEBUG=micromono* node server/server.js --service-dir ./ --service io
 
 docker-install:
-	cd /opt/account/ && npm i
-	cd /opt/home/ && npm i && jspm i -y
-	cd /opt/io/ && npm i && jspm i -y
-	cd /opt/balancer/ && npm i && jspm i -y
-	cd /opt/micromono && npm i
+	cd /opt/account/ && npm i --loglevel warn
+	cd /opt/home/ && npm i --loglevel warn && jspm i -y --log err
+	cd /opt/io/ && npm i --loglevel warn && jspm i -y --log err
+	cd /opt/balancer/ && npm i --loglevel warn && jspm i -y --log err
+	cd /opt/micromono && npm i --loglevel warn
 
 cluster:
 	docker-compose run --publish 3000:3000 --rm balancer
