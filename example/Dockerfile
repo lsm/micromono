@@ -1,7 +1,7 @@
 FROM node:4
 
 
-RUN npm --loglevel warn i -g istanbul jspm coveralls
+RUN npm --loglevel error i -g istanbul jspm coveralls
 
 WORKDIR /opt
 

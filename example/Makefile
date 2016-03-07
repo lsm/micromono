@@ -32,11 +32,11 @@ mono-io:
 	DEBUG=micromono* node server/server.js --service-dir ./ --service io
 
 docker-install:
-	cd /opt/account/ && npm i --loglevel warn
-	cd /opt/home/ && npm i --loglevel warn && jspm i -y --log err
-	cd /opt/io/ && npm i --loglevel warn && jspm i -y --log err
-	cd /opt/balancer/ && npm i --loglevel warn && jspm i -y --log err
-	cd /opt/micromono && npm i --loglevel warn
+	cd /opt/account/ && npm i --loglevel error
+	cd /opt/home/ && npm i --loglevel error && jspm i -y --log err
+	cd /opt/io/ && npm i --loglevel error && jspm i -y --log err
+	cd /opt/balancer/ && npm i --loglevel error && jspm i -y --log err
+	cd /opt/micromono && npm i --loglevel error
 
 cluster:
 	docker-compose run --publish 3000:3000 --rm balancer
@@ -60,8 +60,8 @@ report:
 	docker-compose run --rm micromono istanbul report
 
 coveralls:
-	docker-compose run --rm -e COVERALLS_TOKEN=${COVERALLS_TOKEN} micromono make docker-coveralls
+	chmod +x ./coveralls.sh
+	./coveralls.sh
 
 docker-coveralls:
-	echo "repo_token: ${COVERALLS_TOKEN}" > ./.coveralls.yml
 	cat ./coverage/lcov.info | coveralls
