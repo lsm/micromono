@@ -54,7 +54,6 @@
     "jspm": "0.16.30",
     "lodash.assign": "4.0.4",
     "lodash.difference": "4.1.0",
-    "lodash.isarray": "4.0.0",
     "lodash.merge": "4.3.1",
     "lodash.toarray": "4.2.0",
     "lodash.union": "4.2.0",
