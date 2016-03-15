@@ -5,6 +5,7 @@ var program = require('cmdenv')('micromono')
 var SuperPipe = require('superpipe')
 var AssetPipe = require('../lib/web/asset')
 var bundleAsset = require('../lib/web/asset/pipeline').bundleAsset
+var bundleCommon = require('../lib/web/asset/pipeline').bundleCommon
 var LocalServicePipe = require('../lib/service/local')
 
 
@@ -22,6 +23,8 @@ program
   .option('-c --bundle-css', 'Bundle CSS files. Default false.')
   .option('-s --separate-css', 'Bundle CSS into a separate file. Default false.')
   .option('--production', 'Enable all options suitable for production.')
+  .option('--common-bundles', 'Bundle dependencies based on the value of the '
+    + 'commonBundles property defined in package.json. Default false.')
   .parse(process.argv)
 
 var servicePath = program.args[0]
@@ -48,7 +51,8 @@ if (servicePath) {
     minify: program.minify || false,
     mangle: program.mangle || false,
     buildCss: program.buildCss || false,
-    separateCss: program.separateCss || false
+    separateCss: program.separateCss || false,
+    commonBundles: program.commonBundles || false
   }
 
   if (program.production) {
@@ -61,7 +65,8 @@ if (servicePath) {
       minify: program.minify || true,
       mangle: program.mangle || true,
       buildCss: program.buildCss || true,
-      separateCss: program.separateCss || true
+      separateCss: program.separateCss || true,
+      commonBundles: program.commonBundles || false
     }
   }
 
@@ -72,14 +77,44 @@ if (servicePath) {
 
   superpipe.setDep('bundleOptions', options)
 
-  bundleAsset.slice()
-    .connect(superpipe)
-    .pipe(function(bundleCmd) {
-      console.log('jspm ' + bundleCmd)
-      console.log('Bundled successfully')
-      process.exit(0)
-    }, ['bundleCmd'])
-    .error('errorHandler', [null, 'errPipeName', 'errPipeBody'])()
+  var bundlePipeline
+  if (options.commonBundles) {
+    var pubPath
+    superpipe.setDep('bundleCommon', function(bundle, deps, outFile, assetInfo, packagePath, bundleOptions, next) {
+      var bundleCmd = 'bundle ' + deps.join(' + ')
+      bundleOptions.outFile = path.join(pubPath, outFile)
+      bundleCmd += AssetPipe.convertBundleOptionsToStr(bundleOptions)
+      bundle(assetInfo, packagePath, bundleCmd, bundleOptions, next)
+    })
+    bundlePipeline = bundleAsset.slice(0, 3).connect(superpipe)
+      .pipe(function(assetInfo, publicPath, setDep) {
+        pubPath = publicPath
+        setDep({
+          'outCommon70': 'bundle-common70.js',
+          'outCommon50': 'bundle-common50.js',
+          'outCommon30': 'bundle-common30.js',
+          'outCommon0': 'bundle-common0.js'
+        })
+        setDep(assetInfo.commonBundles)
+      }, ['assetInfo', 'publicPath', 'setDep'])
+      .pipe('bundleCommon', ['bundle', 'common0', 'outCommon0',
+        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+      .pipe('bundleCommon', ['bundle', 'common30', 'outCommon30',
+        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+      .pipe('bundleCommon', ['bundle', 'common50', 'outCommon50',
+        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+      .pipe('bundleCommon', ['bundle', 'common70', 'outCommon70',
+        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+      .pipe('updatePackageJSON', ['assetInfo', 'packagePath', 'packageJSON', 'next'])
+  } else {
+    bundlePipeline = bundleAsset.clone(superpipe)
+      .pipe(function(bundleCmd) {
+        console.log('jspm ' + bundleCmd)
+        console.log('Bundled successfully')
+        process.exit(0)
+      }, ['bundleCmd'])
+  }
+  bundlePipeline.error('errorHandler', [null, 'errPipeName', 'errPipeBody'])()
 } else {
   program.outputHelp()
 }
