@@ -61,6 +61,7 @@ report:
 	docker-compose run --rm micromono istanbul report
 
 coveralls:
+	sudo ln -s ./* /opt/
 	chmod +x ./coveralls.sh
 	./coveralls.sh
 
