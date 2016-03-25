@@ -50,5 +50,7 @@ var IO = module.exports = {
 
 // Start the service if this is the main file
 if (require.main === module) {
-  micromono.startService(IO)
+  micromono.startService(IO, function(httpPort) {
+    console.log('local http port: %s', httpPort)
+  }, ['httpPort'])
 }
