@@ -10,7 +10,7 @@
     "cookie-parser": "1.4.1",
     "express-session": "1.13.0",
     "jade": "1.11.0",
-    "micromono": "0.2.3",
+    "micromono": "0.2.x",
     "passport": "0.3.2",
     "passport-local": "1.0.0"
   }

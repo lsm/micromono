@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "jade": "1.11.0",
-    "micromono": "0.2.3",
+    "micromono": "0.2.x",
     "socket.io": "1.4.5",
     "jspm": "0.16.30"
   },
