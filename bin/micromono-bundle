@@ -5,7 +5,6 @@ var program = require('cmdenv')('micromono')
 var SuperPipe = require('superpipe')
 var AssetPipe = require('../lib/web/asset')
 var bundleAsset = require('../lib/web/asset/pipeline').bundleAsset
-var bundleCommon = require('../lib/web/asset/pipeline').bundleCommon
 var LocalServicePipe = require('../lib/service/local')
 
 
@@ -86,6 +85,13 @@ if (servicePath) {
       bundleCmd += AssetPipe.convertBundleOptionsToStr(bundleOptions)
       bundle(assetInfo, packagePath, bundleCmd, bundleOptions, next)
     })
+
+    superpipe.setDep('cleanAssetInfo', function(assetInfo) {
+      // Common bundle files should not be set as main bundle files
+      assetInfo.bundleJs = ''
+      assetInfo.bundleCss = ''
+    })
+
     bundlePipeline = bundleAsset.slice(0, 3).connect(superpipe)
       .pipe(function(assetInfo, publicPath, setDep) {
         pubPath = publicPath
@@ -105,6 +111,7 @@ if (servicePath) {
         'assetInfo', 'packagePath', 'bundleOptions', 'next'])
       .pipe('bundleCommon', ['bundle', 'common70', 'outCommon70',
         'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+      .pipe('cleanAssetInfo', 'assetInfo')
       .pipe('updatePackageJSON', ['assetInfo', 'packagePath', 'packageJSON', 'next'])
   } else {
     bundlePipeline = bundleAsset.clone(superpipe)
