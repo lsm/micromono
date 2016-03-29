@@ -79,11 +79,11 @@ if (servicePath) {
   var bundlePipeline
   if (options.commonBundles) {
     var pubPath
-    superpipe.setDep('bundleCommon', function(bundle, deps, outFile, assetInfo, packagePath, bundleOptions, next) {
+    superpipe.setDep('bundleCommon', function(bundle, deps, outFile, assetInfo, packagePath, bundleOptions, jspmBinPath, next) {
       var bundleCmd = 'bundle ' + deps.join(' + ')
       bundleOptions.outFile = path.join(pubPath, outFile)
       bundleCmd += AssetPipe.convertBundleOptionsToStr(bundleOptions)
-      bundle(assetInfo, packagePath, bundleCmd, bundleOptions, next)
+      bundle(assetInfo, packagePath, jspmBinPath, bundleCmd, bundleOptions, next)
     })
 
     superpipe.setDep('cleanAssetInfo', function(assetInfo) {
@@ -104,13 +104,13 @@ if (servicePath) {
         setDep(assetInfo.commonBundles)
       }, ['assetInfo', 'publicPath', 'setDep'])
       .pipe('bundleCommon', ['bundle', 'common0', 'outCommon0',
-        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+        'assetInfo', 'packagePath', 'bundleOptions', 'jspmBinPath', 'next'])
       .pipe('bundleCommon', ['bundle', 'common30', 'outCommon30',
-        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+        'assetInfo', 'packagePath', 'bundleOptions', 'jspmBinPath', 'next'])
       .pipe('bundleCommon', ['bundle', 'common50', 'outCommon50',
-        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+        'assetInfo', 'packagePath', 'bundleOptions', 'jspmBinPath', 'next'])
       .pipe('bundleCommon', ['bundle', 'common70', 'outCommon70',
-        'assetInfo', 'packagePath', 'bundleOptions', 'next'])
+        'assetInfo', 'packagePath', 'bundleOptions', 'jspmBinPath', 'next'])
       .pipe('cleanAssetInfo', 'assetInfo')
       .pipe('updatePackageJSON', ['assetInfo', 'packagePath', 'packageJSON', 'next'])
   } else {
