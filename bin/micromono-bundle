@@ -92,7 +92,7 @@ if (servicePath) {
       assetInfo.bundleCss = ''
     })
 
-    bundlePipeline = bundleAsset.slice(0, 3).connect(superpipe)
+    bundlePipeline = bundleAsset.slice(0, 4).connect(superpipe)
       .pipe(function(assetInfo, publicPath, setDep) {
         pubPath = publicPath
         setDep({
