@@ -5,6 +5,10 @@ micromono:
     - ./:/opt
     - ../:/opt/micromono
     - ./balancer/node_modules/jade:/opt/micromono/node_modules/jade
+    - ../:/opt/balancer/node_modules/micromono
+    - ../:/opt/account/node_modules/micromono
+    - ../:/opt/home/node_modules/micromono
+    - ../:/opt/io/node_modules/micromono
   environment:
     - DEBUG=micromono*
     - NODE_ENV=development
@@ -12,7 +16,7 @@ micromono:
 
 balancer:
   extends: micromono
-  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/balancer/coverage /opt/balancer/server.js
+  command: node /opt/balancer/server.js
   ports:
     - "3000:3000"
   links:
@@ -24,19 +28,43 @@ balancer:
 
 account:
   extends: micromono
-  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/account/coverage /opt/account/index.js
+  command: node /opt/account/index.js
 
 home:
   extends: micromono
-  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/home/coverage /opt/home/index.js
+  command: node /opt/home/index.js
 
 io:
   extends: micromono
-  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/io/coverage /opt/io/index.js
+  command: node /opt/io/index.js
 
 #
 # nightwatch + selenium
 #
+
+balancer-istanbul:
+  extends: micromono
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/balancer/coverage /opt/balancer/server.js
+  ports:
+    - "3000:3000"
+  links:
+    - account
+    - home
+    - io
+  environment:
+    - MICROMONO_SERVICE=account,home,io
+
+account-istanbul:
+  extends: micromono
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/account/coverage /opt/account/index.js
+
+home-istanbul:
+  extends: micromono
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/home/coverage /opt/home/index.js
+
+io-istanbul:
+  extends: micromono
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/io/coverage /opt/io/index.js
 
 hub:
   image: selenium/hub:2.52.0
@@ -44,7 +72,7 @@ chrome:
   image: selenium/node-chrome:2.52.0
   links:
     - hub
-    - balancer
+    - balancer-istanbul
 chromedebug:
   image: selenium/node-chrome-debug:2.52.0
   links:
@@ -56,7 +84,7 @@ firefox:
   image: selenium/node-firefox:2.52.0
   links:
     - hub
-    - balancer
+    - balancer-istanbul
 firefoxdebug:
   image: selenium/node-firefox-debug:2.52.0
   links:
