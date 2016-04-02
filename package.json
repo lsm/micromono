@@ -58,6 +58,6 @@
     "lodash.toarray": "4.2.2",
     "lodash.union": "4.2.1",
     "msgpack-lite": "0.1.17",
-    "superpipe": "0.11.1"
+    "superpipe": "0.11.2"
   }
 }
