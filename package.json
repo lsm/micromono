@@ -48,18 +48,16 @@
     "debug": "2.2.0",
     "express": "4.13.4",
     "http-proxy": "1.13.2",
-    "ip": "1.1.0",
+    "ip": "1.1.2",
     "jdad": "0.2.0",
     "js-args-names": "0.0.2",
-    "jspm": "0.16.31",
-    "lodash.assign": "4.0.4",
-    "lodash.difference": "4.1.0",
-    "lodash.merge": "4.3.1",
-    "lodash.toarray": "4.2.0",
-    "lodash.union": "4.2.0",
+    "jspm": "0.16.32",
+    "lodash.assign": "4.0.6",
+    "lodash.difference": "4.1.2",
+    "lodash.merge": "4.3.3",
+    "lodash.toarray": "4.2.2",
+    "lodash.union": "4.2.1",
     "msgpack-lite": "0.1.17",
-    "socketmq": "0.3.1",
-    "superpipe": "0.10.2"
     "superpipe": "0.11.1"
   }
 }
