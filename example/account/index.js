@@ -3,6 +3,7 @@
  */
 
 var path = require('path')
+var assert = require('assert')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
@@ -138,9 +139,16 @@ var Account = module.exports = {
     }
   },
 
+
+
   api: {
     getUserById: function(id, callback) {
       this.getUserById(id, callback)
+    },
+    getMultiArgs: function (arg1, arg2, callback) {
+      assert.equal(arg1, 1)
+      assert.equal(arg2.key, 'value')
+      callback(null, [1, '2', Buffer('hello')])
     }
   }
 }

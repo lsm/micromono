@@ -3,6 +3,7 @@
  */
 
 var path = require('path')
+var assert = require('assert')
 var bodyParser = require('body-parser')
 
 // setup micromono
@@ -27,12 +28,22 @@ var Home = module.exports = micromono.createService({
     'get::/home/private': [account.middleware.auth(), function privatePage(req, res) {
       // var user = req.user
       account.api.getUserById(req.user.id, function(user) {
-        res.render('page', {
-          title: 'Home Private Page',
-          name: user.username + ', you can not see this page unless you have logged in successfully.',
-          id: user.id,
-          password: user.password,
-          method: 'GET'
+        account.api.getMultiArgs(1, {
+          key: 'value'
+        }, function(err, result) {
+          assert.equal(err, null)
+          assert.equal(result[0], 1)
+          assert.equal(result[1], '2')
+          assert.equal(Buffer.isBuffer(result[2]), true)
+          assert.equal(result[2].toString(), 'hello')
+
+          res.render('page', {
+            title: 'Home Private Page',
+            name: user.username + ', you can not see this page unless you have logged in successfully.',
+            id: user.id,
+            password: user.password,
+            method: 'GET'
+          })
         })
       })
     }],
