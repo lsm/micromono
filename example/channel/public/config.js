@@ -17,7 +17,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
     "engine.io-client": "npm:engine.io-client@1.6.8",
-    "socketmq": "npm:socketmq@0.5.7",
+    "socketmq": "npm:socketmq@0.5.9",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -354,7 +354,7 @@ System.config({
       "inherits": "npm:inherits@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:socketmq@0.5.7": {
+    "npm:socketmq@0.5.9": {
       "amp": "npm:amp@0.3.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1",

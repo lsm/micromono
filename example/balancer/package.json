@@ -16,7 +16,15 @@
     "micromono": "0.2.x"
   },
   "micromono": {
-    "publicURL": "/public"
+    "publicURL": "/public",
+    "commonBundles": {
+      "common30": [
+        "engine.io-client",
+        "socketmq",
+        "lodash.assign",
+        "socket.io-client"
+      ]
+    }
   },
   "jspm": {
     "main": "main.js",
@@ -24,8 +32,10 @@
       "baseURL": "public"
     },
     "dependencies": {
+      "engine.io-client": "npm:engine.io-client@1.6.8",
       "lodash.assign": "npm:lodash.assign@4.0.0",
-      "socket.io-client": "npm:socket.io-client@1.4.5"
+      "socket.io-client": "npm:socket.io-client@1.4.5",
+      "socketmq": "npm:socketmq@0.5.9"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.34",

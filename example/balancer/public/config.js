@@ -22,7 +22,7 @@ System.config({
     "lodash.assign": "npm:lodash.assign@4.0.0",
     "readable-stream": "npm:readable-stream@2.0.6",
     "socket.io-client": "npm:socket.io-client@1.4.5",
-    "socketmq": "npm:socketmq@0.5.8",
+    "socketmq": "npm:socketmq@0.5.9",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -451,7 +451,7 @@ System.config({
       "isarray": "npm:isarray@0.0.1",
       "json3": "npm:json3@3.3.2"
     },
-    "npm:socketmq@0.5.8": {
+    "npm:socketmq@0.5.9": {
       "amp": "npm:amp@0.3.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1",
