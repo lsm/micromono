@@ -21,14 +21,19 @@ balancer:
     - "3000:3000"
   links:
     - account
+    - channel
     - home
     - io
   environment:
-    - MICROMONO_SERVICE=account,home,io
+    - MICROMONO_SERVICE=account,channel,home,io
 
 account:
   extends: micromono
   command: node /opt/account/index.js
+
+channel:
+  extends: micromono
+  command: node /opt/channel/index.js
 
 home:
   extends: micromono

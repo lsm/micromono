@@ -1,0 +1,36 @@
+{
+  "name": "channel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "micromono": "0.3.x"
+  },
+  "devDependencies": {
+    "jspm": "0.16.32"
+  },
+  "micromono": {
+    "name": "channel",
+    "publicURL": "/public/channel"
+  },
+  "jspm": {
+    "main": "channel/main.js",
+    "directories": {
+      "baseURL": "public"
+    },
+    "dependencies": {
+      "engine.io-client": "npm:engine.io-client@^1.6.8",
+      "socketmq": "npm:socketmq@0.5.8"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@5.8.34",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@1.2.6"
+    }
+  }
+}

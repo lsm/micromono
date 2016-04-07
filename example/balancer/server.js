@@ -16,6 +16,9 @@ app.get('/balancer/exit', function(req, res) {
 
 // Get a micromono instance.
 var micromono = require('/opt/micromono')
+process.env.NODE_ENV = 'xxx'
+micromono.set('bundle dev', undefined)
+
 
 // Boot the service(s) with an express app
 // do stuff in the callback.

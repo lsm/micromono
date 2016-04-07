@@ -1,0 +1,12 @@
+div
+  h1 MicroMono Channel Example
+
+  h3 Message from server (emits every 2 seconds):
+  div#message
+
+  if asset && asset.bundleJs
+    script(type='text/javascript', src="#{asset.bundleJs}")
+
+  if asset && asset.main
+    script(type='text/javascript').
+      System.import('#{asset.main}');
