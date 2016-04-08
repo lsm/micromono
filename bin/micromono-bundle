@@ -36,8 +36,8 @@ if (servicePath) {
     .setDep(LocalServicePipe, '*^')
     .setDep('packagePath', servicePath)
     .setDep('service', {})
-    .setDep('errorHandler', function(err, errPipeName, errPipeBody) {
-      console.error('[%s] `bundle` error', errPipeName, errPipeBody, err && err.stack || err)
+    .setDep('errorHandler', function(err, errPipeName) {
+      console.error('[%s] `bundle` error', errPipeName, err && err.stack || err)
       process.exit(-1)
     })
 
@@ -121,7 +121,7 @@ if (servicePath) {
         process.exit(0)
       }, ['bundleCmd'])
   }
-  bundlePipeline.error('errorHandler', [null, 'errPipeName', 'errPipeBody'])()
+  bundlePipeline.error('errorHandler', ['error', 'errPipeName'])()
 } else {
   program.outputHelp()
 }
