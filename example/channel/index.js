@@ -1,24 +1,52 @@
 var micromono = require('/opt/micromono')
-var socketmq = require('socketmq')
+// var account = micromono.require('account')
 
 var IO = module.exports = {
-  upgradeUrl: '/channel/socket',
-
   channel: {
-    namespace: '/filetree',
-    auth: function(req, next) {
-      console.log(req.headers)
-      next(null, true)
+    namespace: '/example/channel',
+    auth: function(cookie, session, next) {
+      if (session && 'string' === typeof session) {
+        session = JSON.parse(session)
+        // Dencrypt session
+        next(null, 'session', session)
+      } else if (cookie) {
+        // Auth client
+        session = {
+          uid: 1
+        }
+        // Encrypt
+        next(null, {
+          ssn: JSON.stringify(session),
+          session: session
+        })
+      }
     },
 
-    join: function(type, topic) {
-      // type could be `sub` or `rep`
-      // topic could be any string
+    join: function(session, channel, next) {
+      console.log('join', session, channel)
+      next(null, {
+        repEvents: ['hello:message', 'hello:reply'],
+        subEvents: ['server:message']
+      })
     },
 
-    leave: function() {},
+    allow: function(session, channel, event, next) {
+      console.log('allow', session, channel, event)
+      next()
+    },
 
-    'sub::hello from channel': function(msg) {}
+    'hello:message': function(session, channel, msg) {
+      console.log('hello:message', session, channel, msg)
+      this.pubChn(channel, 'server:message', 'hello from server')
+    },
+
+    'readFile': function(session, channel, filename, reply) {
+      throw new Error('No one should be able to reach here.')
+    },
+    'hello:reply': function(session, channel, msg, reply) {
+      console.log('hello:reply', session, channel, msg);
+      reply(null, 'Hi, how are you user ' + session.uid)
+    }
   },
 
   use: {
@@ -39,31 +67,7 @@ var IO = module.exports = {
     }
   },
 
-  init: function(app, httpServer) {
-    var socketPath = IO.upgradeUrl
-    console.log('socketmq path', socketPath)
-
-    // Tell socketmq use engine.io
-    var endpoint = 'eio://'
-
-    var smq = socketmq.bind(endpoint, {
-      path: socketPath,
-      httpServer: httpServer,
-      allowRequest: function(req, callback) {
-        console.log('allowRequest')
-        console.log(req.headers)
-        callback(null, true)
-      }
-    })
-
-    smq.sub('hello channel', function(msg) {
-      console.log('server got message:', msg.toString())
-    })
-
-    setInterval(function() {
-      smq.pub('from server', 'hello client')
-    }, 1000)
-
+  init: function(app) {
     // setup express app
     app.set('views', __dirname + '/view')
     app.set('view engine', 'jade')

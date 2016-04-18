@@ -17,6 +17,11 @@ var account = micromono.require('account')
  */
 var Home = module.exports = micromono.createService({
 
+  channel: {
+    namespace: 'home',
+    'home/default': function() {}
+  },
+
   use: {
     // tell micromono to use `layout` middleware at the server side
     // for request urls in the array.
