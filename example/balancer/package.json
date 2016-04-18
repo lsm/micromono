@@ -35,7 +35,7 @@
       "engine.io-client": "npm:engine.io-client@1.6.8",
       "lodash.assign": "npm:lodash.assign@4.0.0",
       "socket.io-client": "npm:socket.io-client@1.4.5",
-      "socketmq": "npm:socketmq@0.5.9"
+      "socketmq": "npm:socketmq@0.6.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.34",
