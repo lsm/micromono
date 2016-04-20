@@ -1,7 +1,7 @@
 var socketmq = require('socketmq')
 
 var smq = socketmq.channel('/example/channel', 'my room')
-smq.connect('eio://dev.instbrew.com:3000', function(stream) {
+smq.connect('eio://', function(stream) {
   console.log(stream);
 })
 
