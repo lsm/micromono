@@ -4,7 +4,10 @@ var micromono = require('/opt/micromono')
 var IO = module.exports = {
   channel: {
     namespace: '/example/channel',
-    auth: function(cookie, session, next) {
+    auth: function(meta, next) {
+      console.log('auth', meta)
+      var cookie = meta.cookie
+      var session = meta.session
       if (session && 'string' === typeof session) {
         session = JSON.parse(session)
         // Dencrypt session
@@ -12,7 +15,8 @@ var IO = module.exports = {
       } else if (cookie) {
         // Auth client
         session = {
-          uid: 1
+          uid: 1,
+          sid: meta.sid
         }
         // Encrypt
         next(null, {
@@ -38,6 +42,11 @@ var IO = module.exports = {
     'hello:message': function(session, channel, msg) {
       console.log('hello:message', session, channel, msg)
       this.pubChn(channel, 'server:message', 'hello from server')
+      if (!this['chn' + session.sid]) {
+        this['chn' + session.sid] = this.chnAdapter.channel('/example/channel', channel)
+      }
+
+      this['chn' + session.sid].pubSid(session.sid, 'server:message', msg + ' for sid: ' + session.sid)
     },
 
     'readFile': function(session, channel, filename, reply) {
@@ -67,11 +76,12 @@ var IO = module.exports = {
     }
   },
 
-  init: function(app) {
+  init: [function(app, chnAdapter) {
     // setup express app
     app.set('views', __dirname + '/view')
     app.set('view engine', 'jade')
-  }
+    this.chnAdapter = chnAdapter
+  }, ['app', 'chnAdapter']]
 }
 
 
