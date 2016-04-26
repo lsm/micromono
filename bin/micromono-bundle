@@ -80,6 +80,10 @@ if (servicePath) {
   if (options.commonBundles) {
     var pubPath
     superpipe.setDep('bundleCommon', function(bundle, deps, outFile, assetInfo, packagePath, bundleOptions, jspmBinPath, setDep) {
+      if (!deps || !Array.isArray(deps) || 0 === deps.length) {
+        console.log('Nothing to bundle for %s', outFile)
+        return true
+      }
       var bundleCmd = 'bundle ' + deps.join(' + ')
       bundleOptions.outFile = path.join(pubPath, outFile)
       bundleCmd += AssetPipe.convertBundleOptionsToStr(bundleOptions)
