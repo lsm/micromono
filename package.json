@@ -29,6 +29,7 @@
     "monolithic",
     "web",
     "rpc",
+    "message",
     "websockets",
     "rest",
     "restful",
@@ -52,15 +53,15 @@
     "ip": "1.1.3",
     "jdad": "0.2.0",
     "js-args-names": "0.0.2",
-    "jspm": "0.16.34",
-    "lodash.assign": "4.0.9",
-    "lodash.difference": "4.3.0",
-    "lodash.isplainobject": "4.0.4",
-    "lodash.merge": "4.4.0",
-    "lodash.toarray": "4.2.4",
-    "lodash.union": "4.4.0",
+    "jspm": "0.16.42",
+    "lodash.assign": "4.1.0",
+    "lodash.difference": "4.4.0",
+    "lodash.isplainobject": "4.0.5",
+    "lodash.merge": "4.5.1",
+    "lodash.toarray": "4.3.0",
+    "lodash.union": "4.5.0",
     "msgpack-lite": "0.1.20",
     "socketmq": "0.7.0",
-    "superpipe": "0.11.4"
+    "superpipe": "0.12.0"
   }
 }
