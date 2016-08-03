@@ -73,7 +73,7 @@ chrome:
   image: selenium/node-chrome:2.53.0
   links:
     - hub
-    - balancer
+    - balancer-istanbul
 chromedebug:
   image: selenium/node-chrome-debug:2.53.0
   links:
