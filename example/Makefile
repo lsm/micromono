@@ -33,10 +33,14 @@ mono-io:
 
 docker-install:
 	cd /opt/account/ && npm i --loglevel silent
+	rm -rf /opt/account/node_modules/micromono
 	cd /opt/home/ && npm i --loglevel silent && jspm i -y --log err
+	rm -rf /opt/home/node_modules/micromono
 	cd /opt/io/ && npm i --loglevel silent && jspm i -y --log err
+	rm -rf /opt/io/node_modules/micromono
 	cd /opt/balancer/ && npm i --loglevel silent && jspm i -y --log err
-	cd /opt/micromono && npm i --loglevel silent
+	rm -rf /opt/balancer/node_modules/micromono
+	cd /opt/micromono && npm i --loglevel silent && npm i --loglevel silent jade
 
 cluster:
 	docker-compose run --publish 3000:3000 --rm balancer

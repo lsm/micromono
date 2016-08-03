@@ -4,11 +4,7 @@ micromono:
   volumes:
     - ./:/opt
     - ../:/opt/micromono
-    - ./balancer/node_modules/jade:/opt/micromono/node_modules/jade
-    - ../:/opt/balancer/node_modules/micromono
-    - ../:/opt/account/node_modules/micromono
-    - ../:/opt/home/node_modules/micromono
-    - ../:/opt/io/node_modules/micromono
+    - ../:/opt/node_modules/micromono
   environment:
     - DEBUG=micromono*
     - NODE_ENV=development
