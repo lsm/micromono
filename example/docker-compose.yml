@@ -72,40 +72,39 @@ io-istanbul:
   command: istanbul cover --config /opt/.istanbul.yml --dir /opt/io/coverage /opt/io/index.js
 
 hub:
-  image: selenium/hub:2.52.0
+  image: selenium/hub:2.53.0
 chrome:
-  image: selenium/node-chrome:2.52.0
+  image: selenium/node-chrome:2.53.0
   links:
     - hub
-    - balancer-istanbul
+    - balancer
 chromedebug:
-  image: selenium/node-chrome-debug:2.52.0
+  image: selenium/node-chrome-debug:2.53.0
   links:
     - hub
     - balancer
   ports:
     - "5900:5900"
 firefox:
-  image: selenium/node-firefox:2.52.0
+  image: selenium/node-firefox:2.53.0
   links:
     - hub
     - balancer-istanbul
 firefoxdebug:
-  image: selenium/node-firefox-debug:2.52.0
+  image: selenium/node-firefox-debug:2.53.0
   links:
     - hub
     - balancer
   ports:
     - 5901:5900
 nightwatch:
-  image: blueimp/nightwatch:0.8
+  image: blueimp/nightwatch:0.9
   links:
     - hub
   volumes:
     - ./test/e2e:/home/node
   environment:
     - APP_URL=http://balancer:3000
-    - IB_WWW_URL=https://www.dev.instbrew.com
 
 
 # NATS as service discovery backend

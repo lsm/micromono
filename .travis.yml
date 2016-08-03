@@ -15,7 +15,7 @@ fast_finish: true
 #   - node_modules
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.5.2
+  DOCKER_COMPOSE_VERSION: 1.8.0
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
@@ -29,6 +29,6 @@ script:
   - docker-compose build
   - make install
   - make e2e-ci
-  - make report
-  - 'sudo mv ../../micromono /opt/'
-  - make coveralls
+  # - make report
+  # - 'sudo mv ../../micromono /opt/'
+  # - make coveralls
