@@ -1,5 +1,5 @@
 micromono:
-  build: ./
+  image: node:4
   command: node /opt/index.js
   volumes:
     - ./:/opt
