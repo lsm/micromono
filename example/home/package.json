@@ -8,14 +8,6 @@
   },
   "author": "MicroMono",
   "license": "MIT",
-  "dependencies": {
-    "body-parser": "1.15.0",
-    "jade": "1.11.0",
-    "micromono": "0.2.x"
-  },
-  "devDependencies": {
-    "jspm": "0.16.30"
-  },
   "micromono": {
     "name": "home",
     "publicURL": "/public/home"

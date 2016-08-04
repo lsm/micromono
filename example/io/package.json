@@ -1,16 +1,9 @@
 {
   "name": "io",
   "version": "1.0.0",
-  "dependencies": {
-    "jade": "1.11.0",
-    "micromono": "0.2.x",
-    "socket.io": "1.4.5",
-    "jspm": "0.16.30"
-  },
   "micromono": {
     "name": "io",
-    "publicURL": "/public/io",
-    "bundleJs": "/public/io/bundle-io.js"
+    "publicURL": "/public/io"
   },
   "jspm": {
     "main": "io/main.js",
@@ -18,7 +11,7 @@
       "baseURL": "public"
     },
     "dependencies": {
-      "socket.io-client": "npm:socket.io-client@1.4.5"
+      "socket.io-client": "npm:socket.io-client@1.4.8"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.34",

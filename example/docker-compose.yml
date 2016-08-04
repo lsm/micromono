@@ -1,6 +1,7 @@
 micromono:
   image: node:4
   command: node /opt/index.js
+  working_dir: /opt
   volumes:
     - ./:/opt
     - ../:/opt/micromono

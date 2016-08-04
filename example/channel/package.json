@@ -8,13 +8,6 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "engine.io": "1.6.8",
-    "micromono": "0.3.x"
-  },
-  "devDependencies": {
-    "jspm": "0.16.32"
-  },
   "micromono": {
     "name": "channel",
     "publicURL": "/public/channel"
@@ -25,8 +18,8 @@
       "baseURL": "public"
     },
     "dependencies": {
-      "engine.io-client": "npm:engine.io-client@1.6.8",
-      "socketmq": "npm:socketmq@0.6.2"
+      "engine.io-client": "npm:engine.io-client@1.6.11",
+      "socketmq": "npm:socketmq@0.7.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.34",

@@ -9,12 +9,6 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "express": "4.13.4",
-    "jade": "1.11.0",
-    "jspm": "0.16.30",
-    "micromono": "0.2.x"
-  },
   "micromono": {
     "publicURL": "/public",
     "commonBundles": {

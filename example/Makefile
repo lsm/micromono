@@ -1,4 +1,7 @@
+NPM := npm --loglevel warn
+JSPM_INSTALL := /opt/node_modules/.bin/jspm i -y
 SERVICES = account balancer home io test
+
 
 sink:
 	- docker rm -f `docker ps -qa`
@@ -25,22 +28,19 @@ clean:
 install:
 	docker-compose run --rm micromono make docker-install
 
+docker-install:
+	cd /opt && $(NPM) i
+	cd /opt/micromono && $(NPM) i
+	cd /opt/home/ && $(JSPM_INSTALL)
+	cd /opt/io/ && $(JSPM_INSTALL)
+	cd /opt/balancer/ && $(JSPM_INSTALL)
+	cd /opt/channel/ && $(JSPM_INSTALL)
+
 mono:
 	DEBUG=micromono* node server/server.js --service-dir ./ --service account,home
 
 mono-io:
 	DEBUG=micromono* node server/server.js --service-dir ./ --service io
-
-docker-install:
-	cd /opt/account/ && npm i --loglevel silent
-	rm -rf /opt/account/node_modules/micromono
-	cd /opt/home/ && npm i --loglevel silent && jspm i -y --log err
-	rm -rf /opt/home/node_modules/micromono
-	cd /opt/io/ && npm i --loglevel silent && jspm i -y --log err
-	rm -rf /opt/io/node_modules/micromono
-	cd /opt/balancer/ && npm i --loglevel silent && jspm i -y --log err
-	rm -rf /opt/balancer/node_modules/micromono
-	cd /opt/micromono && npm i --loglevel silent && npm i --loglevel silent jade
 
 cluster:
 	docker-compose run --publish 3000:3000 --rm balancer
