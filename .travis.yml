@@ -29,6 +29,6 @@ script:
   - docker-compose build
   - make install
   - make e2e-ci
-  - make report
-  - 'sudo mv ../../micromono /opt/'
-  - make coveralls
+  # - make report
+  # - 'sudo mv ../../micromono /opt/'
+  # - make coveralls

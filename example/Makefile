@@ -57,7 +57,7 @@ e2e:
 
 e2e-ci:
 	docker-compose up -d chrome
-	sleep 120
+	sleep 60
 	docker-compose logs &
 	docker-compose run --rm nightwatch --config ./nightwatch.json -e default
 
