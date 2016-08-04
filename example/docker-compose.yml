@@ -21,7 +21,8 @@ balancer:
     - home
     - io
   environment:
-    - MICROMONO_SERVICE=account,channel,home,io
+    - MICROMONO_PORT=3000
+    - MICROMONO_SERVICES=account,channel,home,io
 
 account:
   extends: micromono
@@ -53,7 +54,7 @@ balancer-istanbul:
     - home
     - io
   environment:
-    - MICROMONO_SERVICE=account,home,io
+    - MICROMONO_SERVICES=account,home,io
 
 account-istanbul:
   extends: micromono
