@@ -27,14 +27,14 @@ micromono.startBalancer(app, function(balancerAsset) {
 
   var assetInfo = balancerAsset.assetInfo
 
-  if (assetInfo.bundleJs) {
-    app.locals.mainBundleJs = assetInfo.bundleJs
-  }
-  if (assetInfo.bundleCss) {
-    app.locals.mainBundleCss = assetInfo.bundleCss
-  }
+  if (assetInfo) {
+    if (assetInfo.bundleJs)
+      app.locals.mainBundleJs = assetInfo.bundleJs
 
-  if (assetInfo.main) {
-    app.locals.mainEntryJs = assetInfo.main
+    if (assetInfo.bundleCss)
+      app.locals.mainBundleCss = assetInfo.bundleCss
+
+    if (assetInfo.main)
+      app.locals.mainEntryJs = assetInfo.main
   }
 })
