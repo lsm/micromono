@@ -17,7 +17,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
     "engine.io-client": "npm:engine.io-client@1.6.11",
-    "socketmq": "npm:socketmq@0.7.0",
+    "socketmq": "npm:socketmq@0.7.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -31,7 +31,7 @@ System.config({
       "path-browserify": "npm:path-browserify@0.0.0"
     },
     "github:jspm/nodelibs-process@0.1.2": {
-      "process": "npm:process@0.11.7"
+      "process": "npm:process@0.11.8"
     },
     "github:jspm/nodelibs-stream@0.1.0": {
       "stream-browserify": "npm:stream-browserify@1.0.0"
@@ -126,7 +126,7 @@ System.config({
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:process@0.11.7": {
+    "npm:process@0.11.8": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
@@ -144,7 +144,7 @@ System.config({
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31"
     },
-    "npm:socketmq@0.7.0": {
+    "npm:socketmq@0.7.1": {
       "amp": "npm:amp@0.3.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1",

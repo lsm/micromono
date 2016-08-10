@@ -19,7 +19,7 @@
     },
     "dependencies": {
       "engine.io-client": "npm:engine.io-client@1.6.11",
-      "socketmq": "npm:socketmq@0.7.0"
+      "socketmq": "npm:socketmq@0.7.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.34",

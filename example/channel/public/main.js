@@ -1,52 +1,58 @@
 var socketmq = require('socketmq')
+var smq = socketmq()
 
-var smq = socketmq.channel('/channel/a', 'my room')
-smq.connect('eio://', function(stream) {
-  console.log(stream);
+smq.on('message', function(msg) {
+  console.log('onmessage', msg.toString())
 })
 
-smq.sub('server:message', function(msg) {
+var firstChannel = smq.channel('/channel/a', 'room x')
+
+firstChannel.sub('server:message', function(msg) {
   msg = '<b>/channel/a: </b>' + new Date() + ' message from server: <br />' + msg
   var el = document.getElementById('message')
   el.innerHTML += msg + '<br /><br />'
 })
 
-smq.on('join', function() {
-  console.log('Joined')
+firstChannel.on('join', function() {
+  console.log('"/channel/a" "room x" Joined')
 })
 
-smq.req('hello:reply', 'Hi server', function(err, msg) {
+firstChannel.req('hello:reply', 'Hi server', function(err, msg) {
   msg = '<b>/channel/a: </b>' + new Date() + ' reply from server: <br />' + msg
   var el = document.getElementById('message')
   el.innerHTML += msg + '<br /><br />'
 })
 
-setInterval(function() {
-  smq.req('hello:message', 'message from client')
-}, 2500)
+setTimeout(function() {
+  firstChannel.req('hello:message', 'message from client')
+}, 2000)
 
 
-var secondSmq = socketmq.channel('/channel/b', 'someone\'s room')
-secondSmq.connect('eio://', function(stream) {
-  console.log(stream);
-})
+var secondChannel = smq.channel('/channel/b', 'room y')
 
-secondSmq.sub('server:message', function(msg) {
+secondChannel.sub('server:message', function(msg) {
   msg = '<b>/channel/b: </b>' + new Date() + ' message from server: <br />' + msg
   var el = document.getElementById('message')
   el.innerHTML += msg + '<br /><br />'
 })
 
-secondSmq.on('join', function() {
-  console.log('Joined')
+secondChannel.on('join', function() {
+  console.log('"/channel/b" "room y" Joined')
 })
 
-secondSmq.req('hello:reply', 'Hi server', function(err, msg) {
+
+secondChannel.req('hello:reply', 'Hi server', function(err, msg) {
   msg = '<b>/channel/b: </b>' + new Date() + ' reply from server: <br />' + msg
   var el = document.getElementById('message')
   el.innerHTML += msg + '<br /><br />'
 })
 
-setInterval(function() {
-  secondSmq.req('hello:message', 'message from client')
-}, 2500)
+
+setTimeout(function() {
+  secondChannel.req('hello:message', 'message from client')
+}, 1000)
+
+
+smq.connect('eio://', function(stream) {
+  console.log(stream);
+})

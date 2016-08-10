@@ -30,11 +30,11 @@ var IO = module.exports = {
     }
   },
 
-  init: [function(app, chnBackend) {
+  init: [function(app) {
     // setup express app
     app.set('views', __dirname + '/view')
     app.set('view engine', 'jade')
-  }, ['app', 'chnBackend']]
+  }, ['app']]
 }
 
 

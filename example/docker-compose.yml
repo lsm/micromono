@@ -21,6 +21,8 @@ balancer:
     - channel
     - home
     - io
+  # volumes:
+  #   - ../../socketmq:/opt/balancer/public/jspm_packages/npm/socketmq@0.7.1
   environment:
     - MICROMONO_PORT=3000
     - MICROMONO_SERVICES=account,channel,home,io

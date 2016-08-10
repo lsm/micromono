@@ -3,7 +3,7 @@
 module.exports = {
   namespace: '/channel/a',
   auth: function(meta, next) {
-    console.log('auth', meta)
+    // console.log('auth', meta)
     var cookie = meta.cookie
     var session = meta.session
     if (session && 'string' === typeof session) {
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   join: function(session, channel, next) {
-    console.log('join', session, channel)
+    console.log('join a', session, channel)
     next(null, {
       repEvents: ['hello:message', 'hello:reply'],
       subEvents: ['server:message']
@@ -33,24 +33,25 @@ module.exports = {
   },
 
   allow: function(session, channel, event, next) {
-    console.log('allow', session, channel, event)
+    // console.log('allow', session, channel, event)
     next()
   },
 
   'hello:message': function(session, channel, msg) {
-    console.log('hello:message', session, channel, msg)
-    this.pub(channel, 'server:message', 'message for everyone')
-    if (!this['chn' + session.sid])
-      this['chn' + session.sid] = this.service.chnBackend.channel('/channel/a', channel)
+    console.log('/channel/a hello:message', session, channel, msg)
+    this.pub('/channel/a', channel, 'server:message', 'message for everyone in /channel/a ' + channel)
 
-    this['chn' + session.sid].pubSid(session.sid, 'server:message', 'This message is only for sid: ' + session.sid)
+    this.chnBackend
+      .channel('/channel/a', channel)
+      .pubSid(session.sid, 'server:message',
+        'This message is only for sid: ' + session.sid + ' /channel/a ' + channel)
   },
 
   'readFile': function(session, channel, filename, reply) {
     throw new Error('No one should be able to reach here.')
   },
   'hello:reply': function(session, channel, msg, reply) {
-    console.log('hello:reply', session, channel, msg);
+    // console.log('hello:reply', session, channel, msg);
     reply(null, 'Hi, how are you user ' + session.uid)
   }
 }

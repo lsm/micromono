@@ -1,4 +1,4 @@
-
+var util = require('util')
 
 module.exports = {
   auth: function(meta, next) {
@@ -23,6 +23,7 @@ module.exports = {
   },
 
   join: function(session, channel, next) {
+    console.log('join b', session, channel)
     next(null, {
       repEvents: ['hello:message', 'hello:reply'],
       subEvents: ['server:message']
@@ -30,18 +31,20 @@ module.exports = {
   },
 
   allow: function(session, channel, event, next) {
+    console.log('allow /channel/b', channel, event);
     next()
   },
 
   'hello:message': function(session, channel, msg) {
-    this.pub(channel,
-      'server:message',
-      'message for everyone in namespace "/channel/b" channel ' + channel)
-    if (!this['chn' + session.sid])
-      this['chn' + session.sid] = this.service.chnBackend.channel('/channel/b', channel)
+    this
+      .getChannel('/channel/b')
+      .pubChn(channel,
+        'server:message',
+        'message for everyone in namespace "/channel/b" channel ' + channel)
 
-    this['chn' + session.sid].pubSid(session.sid, 'server:message',
-      'This message is only for sid: ' + session.sid)
+    var message = util.format('sid: %s<br />namespace: %s<br />channel:%s<br />',
+      session.sid, '/channel/b', channel)
+    this.chnBackend.channel('/channel/b', channel).pubSid(session.sid, 'server:message', message)
   },
 
   'readFile': function(session, channel, filename, reply) {

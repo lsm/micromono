@@ -1,5 +1,5 @@
 System.config({
-  "baseURL": "/public",
+  baseURL: "/public",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -21,7 +21,7 @@ System.config({
     "engine.io-client": "npm:engine.io-client@1.6.8",
     "lodash.assign": "npm:lodash.assign@4.0.0",
     "socket.io-client": "npm:socket.io-client@1.4.5",
-    "socketmq": "npm:socketmq@0.6.2",
+    "socketmq": "npm:socketmq@0.7.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -49,7 +49,7 @@ System.config({
       "path-browserify": "npm:path-browserify@0.0.0"
     },
     "github:jspm/nodelibs-process@0.1.2": {
-      "process": "npm:process@0.11.7"
+      "process": "npm:process@0.11.8"
     },
     "github:jspm/nodelibs-stream@0.1.0": {
       "stream-browserify": "npm:stream-browserify@1.0.0"
@@ -195,7 +195,7 @@ System.config({
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:process@0.11.7": {
+    "npm:process@0.11.8": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
@@ -235,7 +235,7 @@ System.config({
       "isarray": "npm:isarray@0.0.1",
       "json3": "npm:json3@3.3.2"
     },
-    "npm:socketmq@0.6.2": {
+    "npm:socketmq@0.7.1": {
       "amp": "npm:amp@0.3.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1",
