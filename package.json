@@ -61,7 +61,7 @@
     "lodash.toarray": "4.3.0",
     "lodash.union": "4.5.0",
     "msgpack-lite": "0.1.20",
-    "socketmq": "0.7.0",
+    "socketmq": "0.7.1",
     "superpipe": "0.12.0"
   }
 }
