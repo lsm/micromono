@@ -29,7 +29,9 @@ balancer:
 
 account:
   extends: micromono
-  command: node /opt/account/index.js
+  ports:
+    - "4545:4545"
+  command: node /opt/account/index.js --health-port 4545
 
 channel:
   extends: micromono
