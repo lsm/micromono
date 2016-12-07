@@ -39,7 +39,9 @@ channel:
 
 home:
   extends: micromono
-  command: node /opt/home/index.js
+  ports:
+    - "4646:4646"
+  command: node /opt/home/index.js --health-port 4646
 
 io:
   extends: micromono
