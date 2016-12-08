@@ -1,3 +1,12 @@
+0.8.0 (2016/12/07)
+==================
+- [Bug] Fix a potential crash for router.
+- [Bug] Fix a potential crash for discovery.
+- Add healthiness module:
+  - Add liveness http handler default path `__health/alive`.
+  - Add readiness http handler default path `__health/functional`.
+- Re-organize files and directories.
+
 0.2.0 (2016/02/28)
 ==================
 - Allow using `this` to reference service instance in api handlers.
