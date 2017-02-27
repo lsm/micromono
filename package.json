@@ -46,8 +46,8 @@
   "dependencies": {
     "callsite": "1.0.0",
     "cmdenv": "0.5.0",
-    "debug": "2.6.0",
-    "engine.io": "2.0.1",
+    "debug": "2.6.1",
+    "engine.io": "2.0.2",
     "express": "4.14.1",
     "http-proxy": "1.16.2",
     "ip": "1.1.4",
