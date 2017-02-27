@@ -8,8 +8,13 @@ micromono:
     - ../:/opt/node_modules/micromono
   environment:
     - DEBUG=micromono*
+    - MICROMONO_LOG_LEVEL=trace
     - NODE_ENV=development
     - NPM_CONFIG_LOGLEVEL=warn
+
+#
+# UDP discovery backend
+#
 
 balancer:
   extends: micromono
@@ -58,14 +63,19 @@ balancer-istanbul:
     - "3000:3000"
   links:
     - account
+    - channel
     - home
     - io
   environment:
-    - MICROMONO_SERVICES=account,home,io
+    - MICROMONO_SERVICES=account,channel,home,io
 
 account-istanbul:
   extends: micromono
   command: istanbul cover --config /opt/.istanbul.yml --dir /opt/account/coverage /opt/account/index.js
+
+channel-istanbul:
+  extends: micromono
+  command: istanbul cover --config /opt/.istanbul.yml --dir /opt/channel/coverage /opt/channel/index.js
 
 home-istanbul:
   extends: micromono
@@ -76,26 +86,26 @@ io-istanbul:
   command: istanbul cover --config /opt/.istanbul.yml --dir /opt/io/coverage /opt/io/index.js
 
 hub:
-  image: selenium/hub:2.53.0
+  image: selenium/hub:3
 chrome:
-  image: selenium/node-chrome:2.53.0
+  image: selenium/node-chrome:3
   links:
     - hub
     - balancer
 chromedebug:
-  image: selenium/node-chrome-debug:2.53.0
+  image: selenium/node-chrome-debug:3
   links:
     - hub
     - balancer
   ports:
     - "5900:5900"
 firefox:
-  image: selenium/node-firefox:2.53.0
+  image: selenium/node-firefox:3
   links:
     - hub
     - balancer-istanbul
 firefoxdebug:
-  image: selenium/node-firefox-debug:2.53.0
+  image: selenium/node-firefox-debug:3
   links:
     - hub
     - balancer
@@ -111,15 +121,16 @@ nightwatch:
     - APP_URL=http://balancer:3000
 
 
+#
 # NATS as service discovery backend
+#
 
 balancer-nats:
   extends: micromono
-  command: node /opt/server.js --service account,home,io
-  volumes:
-    - ./balancer:/opt
+  command: node /opt/balancer/server.js --services account,channel,home,io
   links:
     - account-nats
+    - channel-nats
     - home-nats
     - io-nats
     - nats:nats.dev
@@ -128,7 +139,7 @@ balancer-nats:
     - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
 
 nats:
-  image: nats:0.7.2
+  image: nats:0.9.6
 
 account-nats:
   extends: account
@@ -154,3 +165,10 @@ io-nats:
     - MICROMONO_DISCOVERY_BACKEND=nats
     - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
 
+channel-nats:
+  extends: channel
+  links:
+    - nats:nats.dev
+  environment:
+    - MICROMONO_DISCOVERY_BACKEND=nats
+    - MICROMONO_DISCOVERY_NATS_SERVERS=nats://nats.dev:4222
