@@ -8,7 +8,7 @@ micromono:
     - ../:/opt/node_modules/micromono
   environment:
     - DEBUG=micromono*
-    - MICROMONO_LOG_LEVEL=trace
+    - MICROMONO_LOG_LEVEL=debug
     - NODE_ENV=development
     - NPM_CONFIG_LOGLEVEL=warn
 
