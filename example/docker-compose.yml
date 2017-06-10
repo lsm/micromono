@@ -1,16 +1,20 @@
-micromono:
-  image: node:4
+installation:
+  image: node:6
   command: node /opt/index.js
   working_dir: /opt
   volumes:
     - ./:/opt
     - ../:/opt/micromono
-    - ../:/opt/node_modules/micromono
   environment:
     - DEBUG=micromono*
     - MICROMONO_LOG_LEVEL=debug
     - NODE_ENV=development
     - NPM_CONFIG_LOGLEVEL=warn
+
+micromono:
+  extends: installation
+  volumes:
+    - ../:/opt/node_modules/micromono
 
 #
 # UDP discovery backend

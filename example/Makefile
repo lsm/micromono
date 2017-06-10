@@ -26,7 +26,7 @@ clean:
 	done
 
 install:
-	docker-compose run --rm micromono make docker-install
+	docker-compose run --rm installation make docker-install
 
 docker-install:
 	cd /opt && $(NPM) i
