@@ -46,14 +46,14 @@
   "dependencies": {
     "callsite": "1.0.0",
     "cmdenv": "0.5.0",
-    "debug": "2.6.1",
-    "engine.io": "2.0.2",
-    "express": "4.14.1",
+    "debug": "2.6.8",
+    "engine.io": "3.1.0",
+    "express": "4.15.3",
     "http-proxy": "1.16.2",
-    "ip": "1.1.4",
+    "ip": "1.1.5",
     "jdad": "0.2.0",
     "js-args-names": "0.0.2",
-    "jspm": "0.16.52",
+    "jspm": "0.16.53",
     "lodash.assign": "4.2.0",
     "lodash.difference": "4.5.0",
     "lodash.isplainobject": "4.0.6",
@@ -61,7 +61,7 @@
     "lodash.toarray": "4.4.0",
     "lodash.union": "4.6.0",
     "msgpack-lite": "0.1.26",
-    "socketmq": "0.9.4",
+    "socketmq": "0.10.0",
     "superpipe": "0.14.0"
   }
 }
